@@ -209,19 +209,11 @@
     },
     {
       "name": "storage-provider",
-      "description": "Dynamic storage provider pattern — Supabase or SFTP, selected by STORAGE_PROVIDER env var.",
+      "description": "Core types and factory for the dynamic storage provider pattern.",
       "files": [
         {
           "source": "src/items/services/storage-provider/types.ts",
           "target": "src/shared/services/storage/types.ts"
-        },
-        {
-          "source": "src/items/services/storage-provider/sftp.ts",
-          "target": "src/shared/services/storage/sftp.ts"
-        },
-        {
-          "source": "src/items/services/storage-provider/supabase.ts",
-          "target": "src/shared/services/storage/supabase.ts"
         },
         {
           "source": "src/items/services/storage-provider/get-storage-provider.ts",
@@ -232,7 +224,40 @@
           "target": "src/shared/services/storage/index.ts"
         }
       ],
-      "dependencies": ["ssh2-sftp-client", "@supabase/supabase-js"]
+      "dependencies": []
+    },
+    {
+      "name": "storage-provider-sftp",
+      "description": "SFTP storage provider for the storage-provider system.",
+      "files": [
+        {
+          "source": "src/items/services/storage-provider/sftp/sftp.ts",
+          "target": "src/shared/services/storage/sftp.ts"
+        }
+      ],
+      "dependencies": ["ssh2-sftp-client"]
+    },
+    {
+      "name": "storage-provider-supabase",
+      "description": "Supabase storage provider for the storage-provider system.",
+      "files": [
+        {
+          "source": "src/items/services/storage-provider/supabase/supabase.ts",
+          "target": "src/shared/services/storage/supabase.ts"
+        }
+      ],
+      "dependencies": ["@supabase/supabase-js"]
+    },
+    {
+      "name": "supabase-client",
+      "description": "Supabase client singleton using SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY env vars.",
+      "files": [
+        {
+          "source": "src/items/lib/supabase-client/supabase-client.ts",
+          "target": "src/shared/lib/supabase.ts"
+        }
+      ],
+      "dependencies": ["@supabase/supabase-js"]
     }
   ]
 }

@@ -12,6 +12,7 @@
     "paths": {
       "@src/*": ["./src/*"],
       "@sharedTypes/*": ["./src/shared/types/*"],
+      "@lib/*": ["./src/lib/*"],
       "@utils/*": ["./src/utils/*"],
       "@items/*": ["./src/items/*"]
     },

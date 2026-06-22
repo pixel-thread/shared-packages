@@ -1,6 +1,6 @@
-import { supabase as supabaseClient } from '@items/lib/supabase';
+import { supabase as supabaseClient } from '@lib/supabase';
 
-import type { StorageProvider, UploadParams, UploadResult } from './types';
+import type { StorageProvider, UploadParams, UploadResult } from '../types';
 
 export class SupabaseStorageProvider implements StorageProvider {
   private supabase = supabaseClient;

@@ -2,7 +2,7 @@ import path from 'node:path';
 
 import SftpClient from 'ssh2-sftp-client';
 
-import type { StorageProvider, UploadParams, UploadResult } from './types';
+import type { StorageProvider, UploadParams, UploadResult } from '../types';
 
 function getSftpConfig() {
   return {

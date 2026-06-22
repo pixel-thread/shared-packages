@@ -1,3 +1,2 @@
-export * from './get-storage-provider';
-export * from './sftp';
-export * from './supabase';
+export * from './types';
+export { registerProvider, getStorageProvider } from './get-storage-provider';
