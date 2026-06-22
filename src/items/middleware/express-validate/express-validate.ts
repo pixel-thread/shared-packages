@@ -1,5 +1,5 @@
-import { ValidationError } from '@errors';
-import { formatZodIssues } from '@validator/format-zod-issues';
+import { ValidationError } from '@items/errors/http-errors';
+import { formatZodIssues } from '@items/utils/format-zod-issues';
 import type { NextFunction, Request, Response } from 'express';
 import { type RequestHandler } from 'express';
 import type { ZodType } from 'zod';

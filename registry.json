@@ -191,6 +191,10 @@
           "target": "${errors}/http-errors/base.ts"
         },
         {
+          "source": "src/items/errors/http-errors/index.ts",
+          "target": "${errors}/http-errors/index.ts"
+        },
+        {
           "source": "src/items/errors/http-errors/http-errors.ts",
           "target": "${errors}/http-errors/http-errors.ts"
         }
@@ -294,7 +298,7 @@
       "files": [
         {
           "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
-          "target": "${utils}/format-zod-issues/format-zod-issues.ts"
+          "target": "${utils}/format-zod-issues/index.ts"
         }
       ],
       "dependencies": ["zod"]
