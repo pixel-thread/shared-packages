@@ -53,6 +53,7 @@ export function transformImports(content: string, config: ConsumerConfig): strin
   const specifierPattern = /(['"])@([^'"]+)\1/g;
 
   return content.replace(specifierPattern, (_match, quote, specifier) => {
+    const hadInternalPrefix = specifier.startsWith('src/') || specifier.startsWith('items/');
     const cleaned = specifier.replace(/^(src\/)?(items\/)?/, '');
 
     for (const key of pathKeys) {
@@ -64,6 +65,10 @@ export function transformImports(content: string, config: ConsumerConfig): strin
       }
     }
 
-    return `${quote}${config.alias}/src/${cleaned}${quote}`;
+    if (hadInternalPrefix) {
+      return `${quote}${config.alias}/src/${cleaned}${quote}`;
+    }
+
+    return `${quote}@${specifier}${quote}`;
   });
 }

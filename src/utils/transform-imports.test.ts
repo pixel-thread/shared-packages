@@ -84,6 +84,15 @@ describe('transformImports', () => {
     expect(transformImports(input, sampleConfig)).toBe(input);
   });
 
+  it('leaves npm scoped package imports untouched', () => {
+    const input = [
+      `import { PrismaPg } from '@prisma/adapter-pg';`,
+      `import { PrismaClient } from '@prisma/client';`,
+      `import nextPlugin from '@next/eslint-plugin-next';`,
+    ].join('\n');
+    expect(transformImports(input, sampleConfig)).toBe(input);
+  });
+
   it('handles empty content', () => {
     expect(transformImports('', sampleConfig)).toBe('');
   });

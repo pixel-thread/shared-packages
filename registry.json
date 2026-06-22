@@ -21,7 +21,12 @@
           "target": "eslint.config.mjs"
         }
       ],
-      "devDependencies": ["@eslint/js", "eslint-plugin-simple-import-sort", "globals", "typescript-eslint"]
+      "devDependencies": [
+        "@eslint/js",
+        "eslint-plugin-simple-import-sort",
+        "globals",
+        "typescript-eslint"
+      ]
     },
     {
       "name": "eslint-next",
@@ -32,7 +37,12 @@
           "target": "eslint.config.mjs"
         }
       ],
-      "devDependencies": ["@next/eslint-plugin-next", "eslint-plugin-react-hooks", "eslint-plugin-simple-import-sort", "typescript-eslint"]
+      "devDependencies": [
+        "@next/eslint-plugin-next",
+        "eslint-plugin-react-hooks",
+        "eslint-plugin-simple-import-sort",
+        "typescript-eslint"
+      ]
     },
     {
       "name": "eslint-react-native",
@@ -54,7 +64,29 @@
           "target": "eslint.config.mjs"
         }
       ],
-      "devDependencies": ["@tanstack/eslint-plugin-query", "@tanstack/eslint-plugin-router", "eslint-plugin-react-hooks", "eslint-plugin-simple-import-sort", "typescript-eslint"]
+      "devDependencies": [
+        "@tanstack/eslint-plugin-query",
+        "@tanstack/eslint-plugin-router",
+        "eslint-plugin-react-hooks",
+        "eslint-plugin-simple-import-sort",
+        "typescript-eslint"
+      ]
+    },
+    {
+      "name": "prisma",
+      "description": "Base Prisma schema with PostgreSQL extensions and client singleton with pg-pool adapter.",
+      "files": [
+        {
+          "source": "src/items/prisma/base.prisma",
+          "target": "prisma/schema/base.prisma"
+        },
+        {
+          "source": "src/items/prisma/client.ts",
+          "target": "src/shared/libs/prisma/index.ts"
+        }
+      ],
+      "dependencies": ["@prisma/client", "@prisma/adapter-pg", "pg"],
+      "devDependencies": ["@types/pg"]
     },
     {
       "name": "user-schema",
