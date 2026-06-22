@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "items": [
     {
+      "name": "generate-feature",
+      "description": "Scaffolds Next.js feature folders (lib, services, routes, types, utils, validators, repositories).",
+      "files": [
+        {
+          "source": "src/items/scripts/generate-feature/generate-feature.js",
+          "target": "scripts/generate-feature.js"
+        }
+      ]
+    },
+    {
       "name": "user-schema",
       "description": "Zod schema and types for creating a user.",
       "files": [
