@@ -22,7 +22,7 @@ pnpm build
 pnpm pack --dry-run
 ```
 
-Ensure `dist/`, `registry.json`, and `items/` are included.
+Ensure `dist/`, `registry.json`, and `src/items/` are included (defined in `package.json` `files` field).
 
 ### 4. Version your release
 
@@ -80,6 +80,8 @@ pnpm dlx @pixel-thread/shared-packages add user-schema
 ## Release checklist
 
 - [ ] `pnpm build` succeeds
+- [ ] `pnpm lint` passes
+- [ ] `pnpm format:check` passes
 - [ ] `pnpm pack --dry-run` shows all expected files
 - [ ] `shared-packages list` works locally
 - [ ] Each item installs into a clean test project

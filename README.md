@@ -22,11 +22,11 @@ Files become part of your project, editable and customizable.
 # Set up consumer auth
 echo "@pixel-thread:registry=https://registry.npmjs.org/" >> .npmrc
 
-# List available items
-pnpm dlx @pixel-thread/shared-packages list
-
 # Install an item
 pnpm dlx @pixel-thread/shared-packages add user-schema
+
+# Or browse and pick interactively
+pnpm dlx @pixel-thread/shared-packages add
 ```
 
 ## Registry vs npm package vs workspace

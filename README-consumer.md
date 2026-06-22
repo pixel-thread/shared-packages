@@ -73,7 +73,11 @@ pnpm dlx @pixel-thread/shared-packages list
 ### Install an item
 
 ```bash
+# Direct install by name
 pnpm dlx @pixel-thread/shared-packages add user-schema
+
+# Interactive toggle — pick items with arrow keys and space
+pnpm dlx @pixel-thread/shared-packages add
 ```
 
 This copies the item's files into your project and installs its dependencies.
