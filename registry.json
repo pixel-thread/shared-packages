@@ -388,6 +388,10 @@
         {
           "source": "src/items/middleware/rbac/rbac.ts",
           "target": "${middleware}/rbac/rbac.ts"
+        },
+        {
+          "source": "src/items/shared/types/express.d.ts",
+          "target": "${types}/express.d.ts"
         }
       ],
       "itemDependencies": ["http-errors", "async-handler"],
@@ -401,6 +405,10 @@
         {
           "source": "src/items/middleware/timeout/timeout.ts",
           "target": "${middleware}/timeout/timeout.ts"
+        },
+        {
+          "source": "src/items/shared/types/express.d.ts",
+          "target": "${types}/express.d.ts"
         }
       ],
       "dependencies": ["express"],
