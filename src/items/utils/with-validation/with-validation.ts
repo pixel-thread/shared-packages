@@ -1,9 +1,9 @@
 import type { NextRequest } from "next/server";
 import type { ZodType } from "zod";
 
-import { InvalidJsonError, ValidationError } from "@shared/errors/http-errors";
-import { handleApiErrors } from "./handle-api-errors";
-import { formatZodIssues } from "@shared/utils/format-zod-issues";
+import { InvalidJsonError, ValidationError } from "@items/errors/http-errors";
+import { handleApiErrors } from "@items/errors/handle-api-errors";
+import { formatZodIssues } from "@items/utils/format-zod-issues";
 
 type MaybePromise<T> = Promise<T> | T;
 

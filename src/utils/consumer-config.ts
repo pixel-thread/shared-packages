@@ -22,7 +22,6 @@ export const DEFAULT_CONSUMER_CONFIG: ConsumerConfig = {
     '@shared/*': ['src/shared/*'],
   },
   paths: {
-    api: 'src/shared/api',
     types: 'src/shared/types',
     errors: 'src/shared/errors',
     lib: 'src/shared/lib',

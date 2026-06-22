@@ -321,16 +321,28 @@
       "description": "Next.js route handler validation wrapper with Zod schema support.",
       "files": [
         {
-          "source": "src/items/utils/with-validation/with-validation.ts",
-          "target": "${api}/with-validation.ts"
-        },
-        {
-          "source": "src/items/utils/with-validation/handle-api-errors.ts",
-          "target": "${api}/handle-api-errors.ts"
-        },
-        {
           "source": "src/items/utils/with-validation/index.ts",
-          "target": "${api}/with-validation/index.ts"
+          "target": "${utils}/with-validation/index.ts"
+        },
+        {
+          "source": "src/items/utils/with-validation/with-validation.ts",
+          "target": "${utils}/with-validation/with-validation.ts"
+        },
+        {
+          "source": "src/items/errors/handle-api-errors.ts",
+          "target": "${utils}/errors/handle-api-errors.ts"
+        },
+        {
+          "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
+          "target": "${utils}/formatters/format-zod-issues.ts"
+        },
+        {
+          "source": "src/items/errors/http-errors/http-errors.ts",
+          "target": "${utils}/errors/http-errors.ts"
+        },
+        {
+          "source": "src/items/errors/http-errors/index.ts",
+          "target": "${utils}/errors/index.ts"
         }
       ],
       "dependencies": ["next", "zod"]
