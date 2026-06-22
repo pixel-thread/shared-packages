@@ -1,4 +1,4 @@
-export {default as apiClient} from "./client"
+export { default } from "./client";
 export * from "./constants"
 export * from "./http"
 export * from "./request-interceptor"

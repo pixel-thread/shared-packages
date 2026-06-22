@@ -6,7 +6,7 @@
  * via a `POST /logs` endpoint for centralised log aggregation.
  */
 
-import {apiClient} from "@items/utils/http";
+import apiClient from "@items/utils/http";
 /** Log severity levels. */
 type ErrorType = "ERROR" | "INFO" | "WARN" | "LOG";
 

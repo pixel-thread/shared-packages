@@ -1,4 +1,3 @@
-import { logger } from '@src/shared/logger';
 import type { NextFunction, Request, Response } from 'express';
 import { AppError } from '@items/errors/http-errors/base';
 import { normalizeUnknownError } from '@items/errors/normalize-error/normalize-error';
@@ -10,7 +9,7 @@ export function errorHandler(err: unknown, req: Request, res: Response, _next: N
 
   if (!(err instanceof AppError)) {
     const user = reqAny.user as { associationId?: string; id?: string } | undefined;
-    logger.error(
+    console.error(
       { traceId, error: err, associationId: user?.associationId, userId: user?.id },
       'Unhandled error',
     );
