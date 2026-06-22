@@ -1,9 +1,9 @@
-import { ForbiddenError } from '@errors';
-import type { UserRole } from '@prisma/client';
-import { asyncHandler } from '@utils/async-handler';
+import { ForbiddenError } from '@items/errors/http-errors/http-errors';
+import { asyncHandler } from '@items/utils/async-handler';
 import type { RequestHandler } from 'express';
 
-export function rbac(...roles: UserRole[]): RequestHandler {
+// TODO: add correct role type
+export function rbac(...roles: any[]): RequestHandler {
   return asyncHandler(async (req, _res, next) => {
     const role = req?.user?.roles;
     if (!role || !roles.some((r) => role.includes(r))) {
