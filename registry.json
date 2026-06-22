@@ -99,7 +99,7 @@
       "description": "Positive and negative regex patterns for Zod validation.",
       "files": [
         {
-          "source": "src/items/schemas/regex-patterns/regex-patterns.ts",
+          "source": "src/items/utils/regex-patterns/regex-patterns.ts",
           "target": "src/shared/validation/regex-patterns.ts"
         }
       ]
@@ -206,6 +206,17 @@
         }
       ],
       "dependencies": ["jose", "zod"]
+    },
+    {
+      "name": "common-schemas",
+      "description": "Reusable Zod schemas for UUID, page size, and page number validation.",
+      "files": [
+        {
+          "source": "src/items/schemas/common-schemas/common-schemas.ts",
+          "target": "src/shared/validation/common-schemas.ts"
+        }
+      ],
+      "dependencies": ["zod"]
     }
   ]
 }
