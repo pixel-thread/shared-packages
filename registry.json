@@ -321,12 +321,8 @@
       "description": "Next.js route handler validation wrapper with Zod schema support.",
       "files": [
         {
-          "source": "src/items/utils/with-validation/index.ts",
-          "target": "${utils}/with-validation/index.ts"
-        },
-        {
           "source": "src/items/utils/with-validation/with-validation.ts",
-          "target": "${utils}/with-validation/with-validation.ts"
+          "target": "${utils}/with-validation/index.ts"
         },
         {
           "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
@@ -345,12 +341,8 @@
           "target": "${errors}/handle-api-errors.ts"
         },
         {
-          "source": "src/items/errors/normalize-error/index.ts",
-          "target": "${errors}/normalize-error/index.ts"
-        },
-        {
           "source": "src/items/errors/normalize-error/normalize-error.ts",
-          "target": "${errors}/normalize-error/normalize-error.ts"
+          "target": "${errors}/normalize-error.ts"
         },
         {
           "source": "src/items/errors/http-errors/http-errors.ts",
@@ -359,10 +351,6 @@
         {
           "source": "src/items/errors/http-errors/base.ts",
           "target": "${errors}/http-errors/base.ts"
-        },
-        {
-          "source": "src/items/errors/http-errors/index.ts",
-          "target": "${errors}/http-errors/index.ts"
         }
       ],
       "dependencies": ["next", "zod", "jose"]
@@ -401,6 +389,18 @@
       ],
       "itemDependencies": ["http-errors"],
       "dependencies": ["jose", "zod"]
+    },
+    {
+      "name": "express-error-handler",
+      "description": "Express error handling middleware that normalizes errors into a consistent JSON response.",
+      "files": [
+        {
+          "source": "src/items/errors/error-handler/error-handler.ts",
+          "target": "${errors}/errors/error-handler.ts"
+        }
+      ],
+      "itemDependencies": ["http-errors", "normalize-error"],
+      "dependencies": ["express"]
     },
     {
       "name": "storage-provider",

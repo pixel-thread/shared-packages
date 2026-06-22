@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import type { ZodType } from "zod";
 
 import { InvalidJsonError, ValidationError } from "@items/errors/http-errors";
-import { handleApiErrors } from "@items/errors/handle-api-errors";
+import { handleErrors } from "@src/items/errors/handle-errors";
 import { formatZodIssues } from "@items/utils/format-zod-issues";
 
 type MaybePromise<T> = Promise<T> | T;
@@ -107,7 +107,7 @@ export function withValidation<
   schemas: ValidationSchemas<TBody, TQuery, TParams>,
   handler: ValidatedHandler<TBody, TQuery, TParams, TContext>,
 ) {
-  return handleApiErrors<TContext>(async (request, context) => {
+  return handleErrors<TContext>(async (request, context) => {
     const validated: ValidatedValues<TBody, TQuery, TParams> = {};
 
     if (schemas.body) {
