@@ -419,6 +419,42 @@
       "devDependencies": ["@types/express"]
     },
     {
+      "name": "cors",
+      "description": "Express CORS middleware with allowlist of origins and secure defaults.",
+      "files": [
+        {
+          "source": "src/items/middleware/cors/cors.ts",
+          "target": "${middleware}/cors/cors.ts"
+        }
+      ],
+      "dependencies": ["cors"],
+      "devDependencies": ["@types/cors"]
+    },
+    {
+      "name": "file-upload",
+      "description": "Multer-based file upload middleware with MIME type validation, filename filtering, and suspicious extension blocking.",
+      "files": [
+        {
+          "source": "src/items/middleware/file-upload/file-upload.ts",
+          "target": "${middleware}/file-upload/file-upload.ts"
+        }
+      ],
+      "itemDependencies": ["http-errors", "shared-constants"],
+      "dependencies": ["multer"],
+      "devDependencies": ["@types/multer"]
+    },
+    {
+      "name": "security-headers",
+      "description": "Helmet-based security headers middleware with CSP, HSTS, frameguard, and referrer policy.",
+      "files": [
+        {
+          "source": "src/items/middleware/security-headers/security-headers.ts",
+          "target": "${middleware}/security-headers/security-headers.ts"
+        }
+      ],
+      "dependencies": ["helmet"]
+    },
+    {
       "name": "express-error-handler",
       "description": "Express error handling middleware that normalizes errors into a consistent JSON response.",
       "files": [
@@ -481,7 +517,7 @@
     },
     {
       "name": "shared-constants",
-      "description": "Project-wide shared constants (PAGE_SIZE, etc.).",
+      "description": "Project-wide shared constants including pagination, file size limits, and allowed file format/MIME type lists.",
       "files": [
         {
           "source": "src/items/shared/constants/constants.ts",
