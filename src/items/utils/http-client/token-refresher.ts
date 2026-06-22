@@ -6,7 +6,6 @@
  * retried once the new token is available.
  */
 
-import { logger } from '@utils/logger';
 import { API_BASE_URL } from './constants';
 import type { QueueItem } from '@shared/types';
 import apiClient from './client';
@@ -61,28 +60,23 @@ export const refreshToken = async (): Promise<string> => {
     throw new Error('No refresh token available');
   }
 
-  logger.debug('Refreshing token started');
 
   const response = await apiClient.post<{ data?: RefreshResponse }>(
     `${API_BASE_URL}/auth/refresh`,
     { token: refreshTokenValue },
   );
 
-  logger.debug('Refreshing token completed');
 
   const newAccessToken = response.data.data?.access_token ?? '';
 
   if (newAccessToken) {
-    logger.debug('Access token updated');
     // TODO: persist to secure storage
   }
 
   const newRefreshToken = response.data?.data?.refresh_token ?? '';
   if (newRefreshToken) {
-    logger.debug('Refresh token updated');
     // TODO: persist to secure storage
   }
 
-  logger.debug('Token refreshed');
   return newAccessToken;
 };
