@@ -126,13 +126,27 @@ export async function addItem(
     console.log(`Added ${resolvedTarget}`);
   }
 
-  if (!options.skipInstall && item.dependencies?.length) {
+  if (!options.skipInstall) {
     const packageManager = await detectPackageManager(projectRoot);
 
-    console.log(`Installing dependencies with ${packageManager}: ${item.dependencies.join(', ')}`);
+    if (item.dependencies?.length) {
+      console.log(
+        `Installing dependencies with ${packageManager}: ${item.dependencies.join(', ')}`,
+      );
 
-    await execFileAsync(packageManager, ['add', ...item.dependencies], {
-      cwd: projectRoot,
-    });
+      await execFileAsync(packageManager, ['add', ...item.dependencies], {
+        cwd: projectRoot,
+      });
+    }
+
+    if (item.devDependencies?.length) {
+      console.log(
+        `Installing dev dependencies with ${packageManager}: ${item.devDependencies.join(', ')}`,
+      );
+
+      await execFileAsync(packageManager, ['add', '-D', ...item.devDependencies], {
+        cwd: projectRoot,
+      });
+    }
   }
 }
