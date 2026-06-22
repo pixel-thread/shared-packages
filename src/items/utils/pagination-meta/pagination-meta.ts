@@ -6,7 +6,7 @@
  */
 
 import { PAGE_SIZE } from '@items/utils/constants/common';
-import type { PaginationMeta } from '@src/shared/types/types';
+import type { PaginationMeta } from '@items/types/pagination-meta';
 
 /**
  * Builds pagination metadata from a total count and current page.

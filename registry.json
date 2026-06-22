@@ -263,7 +263,7 @@
           "target": "${utils}/http/token-refresher.ts"
         },
         {
-          "source": "src/shared/types/api.ts",
+          "source": "src/items/types/api.ts",
           "target": "${types}/api.ts"
         }
       ],
