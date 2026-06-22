@@ -6,12 +6,12 @@ import type { StorageProvider, UploadParams, UploadResult } from '../types';
 
 function getSftpConfig() {
   return {
-    host: process.env.SFTP_HOST,
-    port: process.env.SFTP_PORT,
-    timeout: process.env.SFTP_TIMEOUT,
-    username: process.env.SFTP_USERNAME,
-    password: process.env.SFTP_PASSWORD,
-    readyTimeout: process.env.SFTP_TIMEOUT,
+    host: process.env.SFTP_HOST! as string,
+    port: process.env.SFTP_PORT! as unknown as number,
+    timeout: process.env.SFTP_TIMEOUT! as unknown as number,
+    username: process.env.SFTP_USERNAME!,
+    password: process.env.SFTP_PASSWORD!,
+    readyTimeout: process.env.SFTP_TIMEOUT! as unknown as number,
   };
 }
 

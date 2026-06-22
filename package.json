@@ -52,6 +52,7 @@
     "@types/express": "^5.0.6",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^26.0.0",
+    "@types/ssh2-sftp-client": "^9.0.6",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
     "axios": "^1.18.0",
