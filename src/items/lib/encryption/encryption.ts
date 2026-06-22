@@ -1,9 +1,14 @@
-import { env } from '@src/env';
 import * as crypto from 'crypto';
 
 const ALGORITHM = 'aes-256-gcm';
 
-const KEY = Buffer.from(env.FIELD_ENCRYPTION_KEY, 'hex');
+const ENCRYPTION_KEY = process.env.FIELD_ENCRYPTION_KEY;
+
+if (!ENCRYPTION_KEY) {
+  throw new Error('FIELD_ENCRYPTION_KEY environment variable is required');
+}
+
+const KEY = Buffer.from(ENCRYPTION_KEY, 'hex');
 
 /** Encrypts a plaintext string using AES-256-GCM. Returns a colon-delimited hex string. */
 export const encrypt = (plain: string): string => {
@@ -39,7 +44,7 @@ export const decrypt = (ciphertext: string): string => {
     ]);
 
     return decrypted.toString('utf8');
-  } catch (error) {
+  } catch {
     throw new Error('Failed to decrypt value');
   }
 };
