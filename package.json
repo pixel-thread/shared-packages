@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "tsup src/cli.ts --format esm --dts",
-    "dev": "tsx src/cli.ts",
+    "dev": "tsup src/cli.ts --format esm --dts --watch",
     "test": "vitest run",
     "test:watch": "vitest",
     "prepublishOnly": "pnpm build",

@@ -329,27 +329,43 @@
           "target": "${utils}/with-validation/with-validation.ts"
         },
         {
-          "source": "src/items/errors/handle-api-errors.ts",
-          "target": "${utils}/errors/handle-api-errors.ts"
+          "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
+          "target": "${utils}/format-zod-issues/format-zod-issues.ts"
         },
         {
-          "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
-          "target": "${utils}/formatters/format-zod-issues.ts"
+          "source": "src/items/utils/format-zod-issues/index.ts",
+          "target": "${utils}/format-zod-issues/index.ts"
+        },
+        {
+          "source": "src/items/errors/index.ts",
+          "target": "${errors}/index.ts"
+        },
+        {
+          "source": "src/items/errors/handle-api-errors.ts",
+          "target": "${errors}/handle-api-errors.ts"
+        },
+        {
+          "source": "src/items/errors/normalize-error/index.ts",
+          "target": "${errors}/normalize-error/index.ts"
+        },
+        {
+          "source": "src/items/errors/normalize-error/normalize-error.ts",
+          "target": "${errors}/normalize-error/normalize-error.ts"
         },
         {
           "source": "src/items/errors/http-errors/http-errors.ts",
-          "target": "${utils}/errors/http-errors.ts"
+          "target": "${errors}/http-errors/http-errors.ts"
         },
         {
           "source": "src/items/errors/http-errors/base.ts",
-          "target": "${utils}/errors/base.ts"
+          "target": "${errors}/http-errors/base.ts"
         },
         {
           "source": "src/items/errors/http-errors/index.ts",
-          "target": "${utils}/errors/index.ts"
+          "target": "${errors}/http-errors/index.ts"
         }
       ],
-      "dependencies": ["next", "zod"]
+      "dependencies": ["next", "zod", "jose"]
     },
     {
       "name": "next-middleware",

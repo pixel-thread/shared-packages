@@ -58,12 +58,12 @@ export function transformImports(content: string, config: ConsumerConfig): strin
     for (const key of pathKeys) {
       if (cleaned === key || cleaned.startsWith(key + '/')) {
         const rest = cleaned.slice(key.length + 1);
-        const prefix = config.paths[key].replace(/^src\//, '');
+        const prefix = config.paths[key];
         const consumerPath = rest ? `${prefix}/${rest}` : prefix;
         return `${quote}${config.alias}/${consumerPath}${quote}`;
       }
     }
 
-    return `${quote}@${cleaned}${quote}`;
+    return `${quote}${config.alias}/src/${cleaned}${quote}`;
   });
 }
