@@ -7,7 +7,7 @@
  */
 
 import { METHODS } from '@utils/constants';
-import { ApiResponse } from '@sharedTypes/api';
+import type { ApiResponse } from '@items/utils/http-client';
 import { http } from '@items/utils/http-client/http';
 
 /** A generic RPC request payload. */

@@ -143,6 +143,47 @@
           "target": "src/shared/api/rpc-client.ts"
         }
       ]
+    },
+    {
+      "name": "format-zod-issues",
+      "description": "Format Zod validation issues into grouped field-message maps.",
+      "files": [
+        {
+          "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
+          "target": "src/shared/utils/format-zod-issues.ts"
+        }
+      ],
+      "dependencies": ["zod"]
+    },
+    {
+      "name": "with-validation",
+      "description": "Next.js route handler validation wrapper with Zod schema support.",
+      "files": [
+        {
+          "source": "src/items/utils/with-validation/with-validation.ts",
+          "target": "src/shared/api/with-validation.ts"
+        },
+        {
+          "source": "src/items/utils/with-validation/handle-api-errors.ts",
+          "target": "src/shared/api/handle-api-errors.ts"
+        }
+      ],
+      "dependencies": ["next", "zod"]
+    },
+    {
+      "name": "next-middleware",
+      "description": "Next.js middleware chain utility with trace-id support.",
+      "files": [
+        {
+          "source": "src/items/utils/next-middleware/chain.ts",
+          "target": "src/shared/middleware/chain.ts"
+        },
+        {
+          "source": "src/items/utils/next-middleware/with-trace-id.ts",
+          "target": "src/shared/middleware/with-trace-id.ts"
+        }
+      ],
+      "dependencies": ["next"]
     }
   ]
 }
