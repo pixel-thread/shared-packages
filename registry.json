@@ -394,7 +394,7 @@
           "target": "${middleware}/rbac/rbac.ts"
         },
         {
-          "source": "src/items/shared/types/express.d.ts",
+          "source": "src/items/types/express.d.ts",
           "target": "${types}/express.d.ts"
         }
       ],
@@ -411,7 +411,7 @@
           "target": "${middleware}/timeout/timeout.ts"
         },
         {
-          "source": "src/items/shared/types/express.d.ts",
+          "source": "src/items/types/express.d.ts",
           "target": "${types}/express.d.ts"
         }
       ],
@@ -531,11 +531,11 @@
       "description": "Project-wide shared TypeScript types and interfaces (PaginationMeta, etc.).",
       "files": [
         {
-          "source": "src/items/shared/types/pagination-meta.ts",
+          "source": "src/items/types/pagination-meta.ts",
           "target": "${types}/pagination-meta.ts"
         },
         {
-          "source": "src/items/shared/types/api.ts",
+          "source": "src/items/types/api.ts",
           "target": "${types}/api.ts"
         }
       ],

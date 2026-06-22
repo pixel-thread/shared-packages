@@ -6,7 +6,7 @@
  */
 
 import { AxiosError, AxiosResponse } from "axios";
-import { ApiResponse } from "@shared/types/api";
+import { ApiResponse } from "@items/types/api";
 
 /**
  * Transforms an unknown error into a standard error {@link ApiResponse}.

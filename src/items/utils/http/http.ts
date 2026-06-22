@@ -6,7 +6,7 @@
  */
 
 import  { AxiosRequestConfig } from "axios";
-import { ApiResponse } from "@shared/types/api";
+import { ApiResponse } from "@items/types/api";
 import { handleResponse, handleAxiosError } from "./response";
 import apiClient from "./client";
 
