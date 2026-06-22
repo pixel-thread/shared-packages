@@ -67,6 +67,7 @@
     {
       "name": "pagination-params",
       "description": "Pagination parameter builder using a shared PAGE_SIZE constant.",
+      "itemDependencies": ["shared-constants"],
       "files": [
         {
           "source": "src/items/utils/pagination-params/pagination-params.ts",
@@ -77,6 +78,7 @@
     {
       "name": "pagination-meta",
       "description": "Pagination metadata builder (total, pages, hasMore).",
+      "itemDependencies": ["shared-constants", "shared-types"],
       "files": [
         {
           "source": "src/items/utils/pagination-meta/pagination-meta.ts",
@@ -88,6 +90,10 @@
       "name": "http-errors",
       "description": "HTTP error classes extending AppError (400, 401, 403, 404, 409, 422, 429, etc.).",
       "files": [
+        {
+          "source": "src/items/errors/http-errors/base.ts",
+          "target": "src/shared/errors/base.ts"
+        },
         {
           "source": "src/items/errors/http-errors/http-errors.ts",
           "target": "src/shared/errors/http-errors.ts"
@@ -103,6 +109,18 @@
           "target": "src/shared/validation/regex-patterns.ts"
         }
       ]
+    },
+    {
+      "name": "common-schemas",
+      "description": "Common Zod schemas (UUID, pageSize, pageNumber) using shared PAGE_SIZE constant.",
+      "files": [
+        {
+          "source": "src/items/schemas/common-schemas/common-schemas.ts",
+          "target": "src/shared/validation/common-schemas.ts"
+        }
+      ],
+      "itemDependencies": ["shared-constants"],
+      "dependencies": ["zod"]
     },
     {
       "name": "http-client",
@@ -194,6 +212,7 @@
           "target": "src/shared/errors/normalize-error.ts"
         }
       ],
+      "itemDependencies": ["http-errors"],
       "dependencies": ["jose", "zod"]
     },
     {
@@ -242,11 +261,33 @@
       "description": "Supabase client singleton using SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY env vars.",
       "files": [
         {
-          "source": "src/items/lib/supabase-client/supabase-client.ts",
+          "source": "src/items/lib/supabase/client.ts",
           "target": "src/shared/lib/supabase.ts"
         }
       ],
       "dependencies": ["@supabase/supabase-js"]
+    },
+    {
+      "name": "shared-constants",
+      "description": "Project-wide shared constants (PAGE_SIZE, etc.).",
+      "files": [
+        {
+          "source": "src/items/shared/constants/index.ts",
+          "target": "src/shared/constants/index.ts"
+        }
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "shared-types",
+      "description": "Project-wide shared TypeScript types and interfaces (PaginationMeta, etc.).",
+      "files": [
+        {
+          "source": "src/items/shared/types/index.ts",
+          "target": "src/shared/types/index.ts"
+        }
+      ],
+      "dependencies": []
     }
   ]
 }

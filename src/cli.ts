@@ -57,7 +57,7 @@ program
           process.exitCode = 1;
           return;
         }
-        await addItem(item, options);
+        await addItem(item, registry, options);
         return;
       }
 
@@ -93,7 +93,7 @@ program
 
       for (const item of itemsToAdd) {
         console.log(`\n── ${item.name} ──`);
-        await addItem(item, options);
+        await addItem(item, registry, options);
       }
     },
   );

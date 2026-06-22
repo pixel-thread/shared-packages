@@ -6,14 +6,13 @@
  * related operations behind a single endpoint.
  */
 
-import { METHODS } from '@utils/constants';
-import type { ApiResponse } from '@items/utils/http-client';
-import { http } from '@items/utils/http-client/http';
+import type { ApiResponse } from '../types/api';
+import { http } from './http';
 
 /** A generic RPC request payload. */
 export type RpcRequest<TParams = unknown> = {
   /** The RPC method name to invoke. */
-  method: METHODS;
+  method: string;
   /** Optional parameters passed to the method. */
   params?: TParams;
 };

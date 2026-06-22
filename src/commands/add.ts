@@ -19,7 +19,7 @@ import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { getPackageRoot } from '../registry/index';
-import type { RegistryItem } from '../types/index';
+import type { Registry, RegistryItem } from '../types/index';
 import { detectPackageManager } from '../utils/index';
 
 const execFileAsync = promisify(execFile);
@@ -44,33 +44,44 @@ export type AddOptions = {
 };
 
 /**
- * Installs a registry item into the current project.
+ * Installs a registry item — and its item dependencies — into the current project.
  *
- * For each file declared in the item:
- * 1. Resolves the source path inside the registry package.
- * 2. Validates the target path stays within the consumer project.
- * 3. Verifies the source file exists.
- * 4. Creates the target directory if needed.
- * 5. Copies the file (or skips if it exists and `overwrite` is false).
- *
- * After all files are copied, installs declared npm dependencies unless
- * `skipInstall` is set.
+ * Resolves `itemDependencies` recursively, deduplicates, and prints what is being
+ * added so the consumer understands the full set of files landing in their project.
  *
  * @param item - The registry item to install.
+ * @param registry - The full registry (used to resolve itemDependencies).
  * @param options - Behaviour flags (overwrite, skipInstall).
+ * @param installed - Internal set tracking already-installed items (prevents loops).
  *
  * @throws If a declared source file is missing in the registry.
  * @throws If a target path attempts to escape the consumer project directory.
- *
- * @example
- * ```ts
- * const item = findItem(registry, "user-schema");
- * if (item) {
- *   await addItem(item, { overwrite: false, skipInstall: false });
- * }
- * ```
  */
-export async function addItem(item: RegistryItem, options: AddOptions): Promise<void> {
+export async function addItem(
+  item: RegistryItem,
+  registry: Registry,
+  options: AddOptions,
+  installed?: Set<string>,
+): Promise<void> {
+  const seen = installed ?? new Set<string>();
+
+  if (seen.has(item.name)) {
+    return;
+  }
+  seen.add(item.name);
+
+  // Resolve item dependencies first (breadth-first, depth-limit checked by `seen`).
+  if (item.itemDependencies?.length) {
+    for (const depName of item.itemDependencies) {
+      const dep = registry.items.find((i) => i.name === depName);
+      if (!dep) {
+        console.warn(`Warning: itemDependency "${depName}" not found in registry — skipping.`);
+        continue;
+      }
+      await addItem(dep, registry, options, seen);
+    }
+  }
+
   const packageRoot = getPackageRoot();
   const projectRoot = process.cwd();
 

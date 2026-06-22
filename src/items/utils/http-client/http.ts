@@ -7,9 +7,9 @@
  */
 
 import axios, { AxiosRequestConfig, isCancel } from "axios";
-import { logger } from "@items/utils/client-logger";
-import { ApiResponse } from "./types";
 import { handleResponse, handleAxiosError } from "./response";
+import {logger} from "@items/utils/client-logger"
+import {ApiResponse} from "@items/shared/types"
 
 /**
  * Typed HTTP client with `get`, `post`, `put`, and `delete` methods.
@@ -26,6 +26,7 @@ import { handleResponse, handleAxiosError } from "./response";
  * }
  * ```
  */
+
 export const http = {
   /**
    * Sends a GET request.

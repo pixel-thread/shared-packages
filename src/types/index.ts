@@ -48,6 +48,8 @@ export type RegistryItem = {
   files: RegistryFile[];
   /** npm packages required by the item's source code. */
   dependencies?: string[];
+  /** Other registry items that must be installed before this one. */
+  itemDependencies?: string[];
 };
 
 /**
