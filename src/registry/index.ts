@@ -5,10 +5,10 @@
  * resolving paths correctly in both development (`tsx`) and production (compiled JS).
  */
 
-import fs from "fs-extra";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import type { Registry, RegistryItem } from "../types/index";
+import fs from 'fs-extra';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import type { Registry, RegistryItem } from '../types/index';
 
 /**
  * Resolves the absolute path to the package root directory.
@@ -28,7 +28,7 @@ import type { Registry, RegistryItem } from "../types/index";
 export function getPackageRoot(): string {
   const currentFilePath = fileURLToPath(import.meta.url);
   const currentDirectory = path.dirname(currentFilePath);
-  return path.resolve(currentDirectory, "..", "..");
+  return path.resolve(currentDirectory, '..', '..');
 }
 
 /**
@@ -48,7 +48,7 @@ export function getPackageRoot(): string {
  */
 export function loadRegistry(): Registry {
   const packageRoot = getPackageRoot();
-  const registryPath = path.join(packageRoot, "registryon");
+  const registryPath = path.join(packageRoot, 'registryon');
   return fs.readJsonSync(registryPath) as Registry;
 }
 

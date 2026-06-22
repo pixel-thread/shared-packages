@@ -1,7 +1,23 @@
+/**
+ * @file Client-side logger with server-side log persistence.
+ *
+ * In development, logs are written to the console with a formatted timestamp.
+ * In production, `ERROR`, `INFO`, and `WARN` entries are sent to the server
+ * via a `POST /logs` endpoint for centralised log aggregation.
+ */
+
 import axios from "axios";
 
+/** Log severity levels. */
 type ErrorType = "ERROR" | "INFO" | "WARN" | "LOG";
 
+/**
+ * Sends a log entry to the server for persistence.
+ *
+ * @param type    - Severity level.
+ * @param message - Short log message.
+ * @param content - Detailed log content (serialised data or description).
+ */
 const sendLogToServer = async (
   type: ErrorType,
   message: string,
@@ -21,6 +37,15 @@ const sendLogToServer = async (
   }
 };
 
+/**
+ * Formats log arguments into a string with timestamp and severity prefix.
+ *
+ * Handles single-argument (string or object) and two-argument (message + data) forms.
+ *
+ * @param type - Severity level.
+ * @param args - One or more values to log.
+ * @returns Formatted log string.
+ */
 const formatData = (type: ErrorType, ...args: any[]): string => {
   const timestamp = new Date().toISOString();
   let content: string;
@@ -37,6 +62,15 @@ const formatData = (type: ErrorType, ...args: any[]): string => {
   return `[${timestamp}] [${type}]: ${content}`;
 };
 
+/**
+ * Core log method — decides output based on environment.
+ *
+ * In development, prints formatted logs to the console.
+ * In production, sends `ERROR`, `INFO`, and `WARN` to the server.
+ *
+ * @param type - Severity level.
+ * @param args - One or more values to log.
+ */
 const logMethod = async (type: ErrorType, ...args: any[]): Promise<void> => {
   if (process.env.NODE_ENV === "development") {
     console.log(formatData(type, ...args));
@@ -72,6 +106,18 @@ const logMethod = async (type: ErrorType, ...args: any[]): Promise<void> => {
   }
 };
 
+/**
+ * Application-wide client logger.
+ *
+ * Provides `error`, `info`, `warn`, and `log` methods that adapt
+ * behaviour based on the current environment.
+ *
+ * @example
+ * ```ts
+ * logger.error("Failed to fetch user", err);
+ * logger.info("User logged in", { userId: 123 });
+ * ```
+ */
 export const logger = {
   error: (...args: any[]) => logMethod("ERROR", ...args),
   info: (...args: any[]) => logMethod("INFO", ...args),

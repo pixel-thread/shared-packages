@@ -15,9 +15,9 @@
  * ```
  */
 
-import { Command } from "commander";
-import { loadRegistry } from "./registry/index";
-import { listItems, addItem } from "./commands/index";
+import { Command } from 'commander';
+import { loadRegistry } from './registry/index';
+import { listItems, addItem } from './commands/index';
 
 /** Create the root CLI program and register all commands. */
 const program = new Command();
@@ -25,29 +25,29 @@ const program = new Command();
 const registry = loadRegistry();
 
 program
-  .name("shared-packages")
-  .description("Install shared source files into a project.")
+  .name('shared-packages')
+  .description('Install shared source files into a project.')
   .version(registry.version);
 
 program
-  .command("list")
-  .description("List available registry items.")
+  .command('list')
+  .description('List available registry items.')
   .action(() => {
     listItems(registry);
   });
 
 program
-  .command("add")
-  .description("Copy one registry item into the current project.")
-  .argument("<item-name>", "Registry item name")
-  .option("-o, --overwrite", "Overwrite existing files")
-  .option("--skip-install", "Do not install item dependencies")
+  .command('add')
+  .description('Copy one registry item into the current project.')
+  .argument('<item-name>', 'Registry item name')
+  .option('-o, --overwrite', 'Overwrite existing files')
+  .option('--skip-install', 'Do not install item dependencies')
   .action(async (itemName: string, options: { overwrite?: boolean; skipInstall?: boolean }) => {
     const item = registry.items.find((entry) => entry.name === itemName);
 
     if (!item) {
       console.error(`Item "${itemName}" was not found.`);
-      console.error("Run `shared-packages list` to see available items.");
+      console.error('Run `shared-packages list` to see available items.');
       process.exitCode = 1;
       return;
     }

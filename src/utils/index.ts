@@ -5,11 +5,11 @@
  * as the CLI grows (e.g. logging, path sanitisation, file prompts).
  */
 
-import fs from "fs-extra";
-import path from "node:path";
+import fs from 'fs-extra';
+import path from 'node:path';
 
 /** Supported package managers that the CLI can auto-detect. */
-export type PackageManager = "pnpm" | "yarn" | "npm";
+export type PackageManager = 'pnpm' | 'yarn' | 'npm';
 
 /**
  * Detects which package manager a project uses based on its lock file.
@@ -28,16 +28,14 @@ export type PackageManager = "pnpm" | "yarn" | "npm";
  * // => "pnpm"
  * ```
  */
-export async function detectPackageManager(
-  projectRoot: string,
-): Promise<PackageManager> {
-  if (await fs.pathExists(path.join(projectRoot, "pnpm-lock.yaml"))) {
-    return "pnpm";
+export async function detectPackageManager(projectRoot: string): Promise<PackageManager> {
+  if (await fs.pathExists(path.join(projectRoot, 'pnpm-lock.yaml'))) {
+    return 'pnpm';
   }
 
-  if (await fs.pathExists(path.join(projectRoot, "yarn.lock"))) {
-    return "yarn";
+  if (await fs.pathExists(path.join(projectRoot, 'yarn.lock'))) {
+    return 'yarn';
   }
 
-  return "npm";
+  return 'npm';
 }

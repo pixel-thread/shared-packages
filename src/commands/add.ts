@@ -14,13 +14,13 @@
  *   before copying.
  */
 
-import fs from "fs-extra";
-import path from "node:path";
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
-import { getPackageRoot } from "../registry/index";
-import type { RegistryItem } from "../types/index";
-import { detectPackageManager } from "../utils/index";
+import fs from 'fs-extra';
+import path from 'node:path';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { getPackageRoot } from '../registry/index';
+import type { RegistryItem } from '../types/index';
+import { detectPackageManager } from '../utils/index';
 
 const execFileAsync = promisify(execFile);
 
@@ -80,22 +80,18 @@ export async function addItem(item: RegistryItem, options: AddOptions): Promise<
 
     // Prevent path-traversal — every target must live under the project root.
     if (!targetPath.startsWith(`${projectRoot}${path.sep}`)) {
-      throw new Error(
-        `Invalid target path: ${file.target}. Path escapes the project directory.`,
-      );
+      throw new Error(`Invalid target path: ${file.target}. Path escapes the project directory.`);
     }
 
     if (!(await fs.pathExists(sourcePath))) {
       throw new Error(
         `Registry source file is missing: ${file.source}. ` +
-        `Verify the file exists in the registry package.`,
+          `Verify the file exists in the registry package.`,
       );
     }
 
     if ((await fs.pathExists(targetPath)) && !options.overwrite) {
-      console.warn(
-        `Skipped ${file.target}: it already exists. Use --overwrite to replace it.`,
-      );
+      console.warn(`Skipped ${file.target}: it already exists. Use --overwrite to replace it.`);
       continue;
     }
 
@@ -110,11 +106,9 @@ export async function addItem(item: RegistryItem, options: AddOptions): Promise<
   if (!options.skipInstall && item.dependencies?.length) {
     const packageManager = await detectPackageManager(projectRoot);
 
-    console.log(
-      `Installing dependencies with ${packageManager}: ${item.dependencies.join(", ")}`,
-    );
+    console.log(`Installing dependencies with ${packageManager}: ${item.dependencies.join(', ')}`);
 
-    await execFileAsync(packageManager, ["add", ...item.dependencies], {
+    await execFileAsync(packageManager, ['add', ...item.dependencies], {
       cwd: projectRoot,
     });
   }

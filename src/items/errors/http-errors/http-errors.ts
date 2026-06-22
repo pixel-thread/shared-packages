@@ -1,3 +1,11 @@
+/**
+ * @file Typed HTTP error classes for common status codes.
+ *
+ * Each class extends {@link AppError} with a preset status code and error code,
+ * reducing boilerplate in route handlers. Additional standalone error types
+ * (`PaymentError`, `WebhookSignatureError`) are included for domain-specific cases.
+ */
+
 import { AppError } from "./base";
 
 /** Error for malformed or invalid client requests (400). */
@@ -70,9 +78,17 @@ export class TooManyRequestsError extends AppError {
   }
 }
 
-/** Error for payment-related failures. */
+/**
+ * Error for payment-related failures.
+ *
+ * Does not extend `AppError` — provides its own `code` and `statusCode` properties
+ * for payment-specific error handling.
+ */
 export class PaymentError extends Error {
+  /** Machine-readable error code (e.g. `"PAYMENT_ERROR"`). */
   code: string;
+
+  /** HTTP status code for the error response. */
   statusCode: number;
 
   constructor(message: string, code = "PAYMENT_ERROR", statusCode = 400) {
@@ -83,7 +99,11 @@ export class PaymentError extends Error {
   }
 }
 
-/** Error for invalid webhook signature verification. */
+/**
+ * Error for invalid webhook signature verification.
+ *
+ * Thrown when a webhook payload fails cryptographic signature validation.
+ */
 export class WebhookSignatureError extends Error {
   constructor(message: string) {
     super(message);

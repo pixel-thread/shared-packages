@@ -1,9 +1,39 @@
+/**
+ * @file Axios HTTP client wrapper with typed responses and request cancellation support.
+ *
+ * Provides a thin wrapper around `axios` with standardised error handling
+ * and typed response shapes. Each method logs cancelled requests via the
+ * client logger and returns a consistent {@link ApiResponse} shape.
+ */
+
 import axios, { AxiosRequestConfig, isCancel } from "axios";
 import { logger } from "@items/utils/client-logger";
 import { ApiResponse } from "./types";
 import { handleResponse, handleAxiosError } from "./response";
 
+/**
+ * Typed HTTP client with `get`, `post`, `put`, and `delete` methods.
+ *
+ * All methods return a standardised {@link ApiResponse} and handle errors
+ * uniformly through {@link handleAxiosError}. Cancelled requests are logged
+ * using the client logger.
+ *
+ * @example
+ * ```ts
+ * const res = await http.get<User[]>("/users");
+ * if (res.success) {
+ *   console.log(res.data);
+ * }
+ * ```
+ */
 export const http = {
+  /**
+   * Sends a GET request.
+   *
+   * @param url    - The request URL.
+   * @param config - Optional Axios request config.
+   * @returns A promise resolving to a typed {@link ApiResponse}.
+   */
   get: async <T>(
     url: string,
     config?: AxiosRequestConfig,
@@ -19,6 +49,14 @@ export const http = {
     }
   },
 
+  /**
+   * Sends a POST request.
+   *
+   * @param url    - The request URL.
+   * @param data   - Optional payload object.
+   * @param config - Optional Axios request config.
+   * @returns A promise resolving to a typed {@link ApiResponse}.
+   */
   post: async <T>(
     url: string,
     data?: object,
@@ -32,6 +70,14 @@ export const http = {
     }
   },
 
+  /**
+   * Sends a PUT request.
+   *
+   * @param url    - The request URL.
+   * @param data   - Optional payload object.
+   * @param config - Optional Axios request config.
+   * @returns A promise resolving to a typed {@link ApiResponse}.
+   */
   put: async <T>(
     url: string,
     data?: object,
@@ -45,6 +91,13 @@ export const http = {
     }
   },
 
+  /**
+   * Sends a DELETE request.
+   *
+   * @param url    - The request URL.
+   * @param config - Optional Axios request config.
+   * @returns A promise resolving to a typed {@link ApiResponse}.
+   */
   delete: async <T>(
     url: string,
     config?: AxiosRequestConfig,

@@ -5,7 +5,7 @@
  * registry and prints its name and description to stdout.
  */
 
-import type { Registry } from "../types/index";
+import type { Registry } from '../types/index';
 
 /**
  * Lists all available registry items to the console.
