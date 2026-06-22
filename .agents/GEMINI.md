@@ -136,6 +136,7 @@ src/
 ├── items/        ← Distributable source files (categorised)
 │   ├── errors/
 │   ├── schemas/
+│   ├── lib/
 │   └── utils/
 ├── registry/     ← Registry loading & path resolution
 ├── types/        ← Shared TypeScript types
@@ -170,6 +171,7 @@ src/items/<category>/<item-name>/
 | ----------- | ------------------------------------- |
 | `errors/`   | Error classes and error utilities     |
 | `schemas/`  | Zod schemas and validation patterns   |
+| `lib/`      | Infrastructure wrappers (Prisma, etc.)|
 | `utils/`    | General-purpose utilities and clients |
 
 ---
