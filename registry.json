@@ -145,7 +145,7 @@
       "files": [
         {
           "source": "src/items/utils/async-handler/async-handler.ts",
-          "target": "${middleware}/async-handler/async-handler.ts"
+          "target": "${utils}/async-handler/index.ts"
         }
       ],
       "dependencies": ["express"]
@@ -393,6 +393,18 @@
       "itemDependencies": ["http-errors", "async-handler"],
       "dependencies": ["express"],
       "devDependencies": ["@types/express", "@prisma/client"]
+    },
+    {
+      "name": "timeout",
+      "description": "Express middleware that aborts requests exceeding a configurable timeout threshold (408).",
+      "files": [
+        {
+          "source": "src/items/middleware/timeout/timeout.ts",
+          "target": "${middleware}/timeout/timeout.ts"
+        }
+      ],
+      "dependencies": ["express"],
+      "devDependencies": ["@types/express"]
     },
     {
       "name": "express-error-handler",
