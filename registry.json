@@ -9,27 +9,9 @@
         {
           "source": "src/items/schemas/user-schema/user.schema.ts",
           "target": "${validation}/user-schema/user.schema.ts"
-        },
-        {
-          "source": "src/items/schemas/user-schema/index.ts",
-          "target": "${validation}/user-schema/index.ts"
         }
       ],
       "dependencies": ["zod"]
-    },
-    {
-      "name": "api-error",
-      "description": "Reusable HTTP API error class.",
-      "files": [
-        {
-          "source": "src/items/errors/api-error/api-error.ts",
-          "target": "${errors}/api-error/api-error.ts"
-        },
-        {
-          "source": "src/items/errors/api-error/index.ts",
-          "target": "${errors}/api-error/index.ts"
-        }
-      ]
     },
     {
       "name": "pagination",
@@ -37,11 +19,7 @@
       "files": [
         {
           "source": "src/items/utils/pagination/pagination.ts",
-          "target": "${utils}/pagination/index.ts"
-        },
-        {
-          "source": "src/items/utils/pagination/index.ts",
-          "target": "${utils}/index.ts"
+          "target": "${utils}/pagination/pagination.ts"
         }
       ]
     },
@@ -52,10 +30,6 @@
         {
           "source": "src/items/utils/url-utils/url-utils.ts",
           "target": "${utils}/url-utils/url-utils.ts"
-        },
-        {
-          "source": "src/items/utils/url-utils/index.ts",
-          "target": "${utils}/url-utils/index.ts"
         }
       ]
     },
@@ -65,11 +39,7 @@
       "files": [
         {
           "source": "src/items/utils/async-handler/async-handler.ts",
-          "target": "${middleware}/async-handler.ts"
-        },
-        {
-          "source": "src/items/utils/async-handler/index.ts",
-          "target": "${middleware}/async-handler/index.ts"
+          "target": "${middleware}/async-handler/async-handler.ts"
         }
       ],
       "dependencies": ["express"]
@@ -81,10 +51,6 @@
         {
           "source": "src/items/utils/formatters/formatters.ts",
           "target": "${utils}/formatters/formatters.ts"
-        },
-        {
-          "source": "src/items/utils/formatters/index.ts",
-          "target": "${utils}/formatters/index.ts"
         }
       ]
     },
@@ -96,10 +62,6 @@
         {
           "source": "src/items/utils/pagination-params/pagination-params.ts",
           "target": "${utils}/pagination-params/pagination-params.ts"
-        },
-        {
-          "source": "src/items/utils/pagination-params/index.ts",
-          "target": "${utils}/pagination-params/index.ts"
         }
       ]
     },
@@ -111,10 +73,6 @@
         {
           "source": "src/items/utils/pagination-meta/pagination-meta.ts",
           "target": "${utils}/pagination-meta/pagination-meta.ts"
-        },
-        {
-          "source": "src/items/utils/pagination-meta/index.ts",
-          "target": "${utils}/pagination-meta/index.ts"
         }
       ]
     },
@@ -129,10 +87,6 @@
         {
           "source": "src/items/errors/http-errors/http-errors.ts",
           "target": "${errors}/http-errors/http-errors.ts"
-        },
-        {
-          "source": "src/items/errors/http-errors/index.ts",
-          "target": "${errors}/http-errors/index.ts"
         }
       ]
     },
@@ -142,11 +96,7 @@
       "files": [
         {
           "source": "src/items/utils/regex-patterns/regex-patterns.ts",
-          "target": "${validation}/regex-patterns.ts"
-        },
-        {
-          "source": "src/items/utils/regex-patterns/index.ts",
-          "target": "${validation}/regex-patterns/index.ts"
+          "target": "${validation}/regex-patterns/regex-patterns.ts"
         }
       ]
     },
@@ -156,11 +106,7 @@
       "files": [
         {
           "source": "src/items/schemas/common-schemas/common-schemas.ts",
-          "target": "${validation}/common-schemas.ts"
-        },
-        {
-          "source": "src/items/schemas/common-schemas/index.ts",
-          "target": "${validation}/common-schemas/index.ts"
+          "target": "${validation}/common-schemas/common-schemas.ts"
         }
       ],
       "itemDependencies": ["shared-constants"],
@@ -203,10 +149,6 @@
           "target": "${utils}/http-client/token-refresher.ts"
         },
         {
-          "source": "src/items/utils/http-client/index.ts",
-          "target": "${utils}/http-client/index.ts"
-        },
-        {
           "source": "src/shared/types/api.ts",
           "target": "${types}/api.ts"
         }
@@ -219,11 +161,7 @@
       "files": [
         {
           "source": "src/items/utils/client-logger/client-logger.ts",
-          "target": "${utils}/client-logger.ts"
-        },
-        {
-          "source": "src/items/utils/client-logger/index.ts",
-          "target": "${utils}/client-logger/index.ts"
+          "target": "${utils}/client-logger/client-logger.ts"
         }
       ],
       "dependencies": ["axios"]
@@ -233,10 +171,6 @@
       "description": "RPC client using HTTP POST to /rpc endpoint.",
       "itemDependencies": ["http-client"],
       "files": [
-        {
-          "source": "src/items/utils/rpc-client/index.ts",
-          "target": "${utils}/rpc-client/index.ts"
-        },
         {
           "source": "src/items/utils/rpc-client/rpc-client.ts",
           "target": "${utils}/rpc-client/rpc-client.ts"
@@ -250,10 +184,6 @@
         {
           "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
           "target": "${utils}/format-zod-issues/format-zod-issues.ts"
-        },
-        {
-          "source": "src/items/utils/format-zod-issues/index.ts",
-          "target": "${utils}/format-zod-issues/index.ts"
         }
       ],
       "dependencies": ["zod"]
@@ -265,10 +195,6 @@
         {
           "source": "src/items/utils/cookie-utils/cookie-utils.ts",
           "target": "${utils}/cookie/cookie-utils.ts"
-        },
-        {
-          "source": "src/items/utils/cookie-utils/index.ts",
-          "target": "${utils}/cookie/index.ts"
         }
       ]
     },
@@ -279,10 +205,6 @@
         {
           "source": "src/items/utils/date-utils/date-utils.ts",
           "target": "${utils}/date/date-utils.ts"
-        },
-        {
-          "source": "src/items/utils/date-utils/index.ts",
-          "target": "${utils}/date/index.ts"
         }
       ]
     },
@@ -293,10 +215,6 @@
         {
           "source": "src/items/utils/env-validator/env-validator.ts",
           "target": "${utils}/env-validator/env-validator.ts"
-        },
-        {
-          "source": "src/items/utils/env-validator/index.ts",
-          "target": "${utils}/env-validator/index.ts"
         }
       ],
       "dependencies": ["zod"]
@@ -308,10 +226,6 @@
         {
           "source": "src/items/utils/jwt-utils/jwt-utils.ts",
           "target": "${utils}/jwt/jwt-utils.ts"
-        },
-        {
-          "source": "src/items/utils/jwt-utils/index.ts",
-          "target": "${utils}/jwt/index.ts"
         }
       ],
       "dependencies": ["jose"]
@@ -322,15 +236,11 @@
       "files": [
         {
           "source": "src/items/utils/next-middleware/chain.ts",
-          "target": "${middleware}/chain.ts"
+          "target": "${middleware}/next-middleware/chain.ts"
         },
         {
           "source": "src/items/utils/next-middleware/with-trace-id.ts",
-          "target": "${middleware}/with-trace-id.ts"
-        },
-        {
-          "source": "src/items/utils/next-middleware/index.ts",
-          "target": "${middleware}/next-middleware/index.ts"
+          "target": "${middleware}/next-middleware/with-trace-id.ts"
         }
       ],
       "dependencies": ["next"]
@@ -342,10 +252,6 @@
         {
           "source": "src/items/errors/normalize-error/normalize-error.ts",
           "target": "${errors}/normalize-error/normalize-error.ts"
-        },
-        {
-          "source": "src/items/errors/normalize-error/index.ts",
-          "target": "${errors}/normalize-error/index.ts"
         }
       ],
       "itemDependencies": ["http-errors"],
@@ -357,7 +263,7 @@
       "files": [
         {
           "source": "src/items/errors/error-handler/error-handler.ts",
-          "target": "${errors}/errors/error-handler.ts"
+          "target": "${errors}/error-handler/error-handler.ts"
         }
       ],
       "itemDependencies": ["http-errors", "normalize-error"],
@@ -369,15 +275,11 @@
       "files": [
         {
           "source": "src/items/services/storage-provider/types.ts",
-          "target": "${services}/types.ts"
+          "target": "${services}/storage-provider/types.ts"
         },
         {
           "source": "src/items/services/storage-provider/get-storage-provider.ts",
-          "target": "${services}/get-storage-provider.ts"
-        },
-        {
-          "source": "src/items/services/storage-provider/index.ts",
-          "target": "${services}/index.ts"
+          "target": "${services}/storage-provider/get-storage-provider.ts"
         }
       ],
       "dependencies": []
@@ -388,7 +290,7 @@
       "files": [
         {
           "source": "src/items/services/storage-provider/sftp/sftp.ts",
-          "target": "${services-storage}/sftp.ts"
+          "target": "${services-storage}/sftp/sftp.ts"
         }
       ],
       "dependencies": ["ssh2-sftp-client"]
@@ -399,7 +301,7 @@
       "files": [
         {
           "source": "src/items/services/storage-provider/supabase/supabase.ts",
-          "target": "${services-storage}/supabase.ts"
+          "target": "${services-storage}/supabase/supabase.ts"
         }
       ],
       "dependencies": ["@supabase/supabase-js"]
@@ -410,11 +312,7 @@
       "files": [
         {
           "source": "src/items/lib/supabase/client.ts",
-          "target": "${lib}/supabase.ts"
-        },
-        {
-          "source": "src/items/lib/supabase/index.ts",
-          "target": "${lib}/supabase/index.ts"
+          "target": "${lib}/supabase/client.ts"
         }
       ],
       "dependencies": ["@supabase/supabase-js"]
@@ -424,8 +322,8 @@
       "description": "Project-wide shared constants (PAGE_SIZE, etc.).",
       "files": [
         {
-          "source": "src/items/shared/constants/index.ts",
-          "target": "${utils}/constants/index.ts"
+          "source": "src/items/shared/constants/constants.ts",
+          "target": "${utils}/constants/constants.ts"
         }
       ],
       "dependencies": []
@@ -435,8 +333,12 @@
       "description": "Project-wide shared TypeScript types and interfaces (PaginationMeta, etc.).",
       "files": [
         {
-          "source": "src/items/shared/types/index.ts",
-          "target": "${types}/index.ts"
+          "source": "src/items/shared/types/pagination-meta.ts",
+          "target": "${types}/pagination-meta.ts"
+        },
+        {
+          "source": "src/items/shared/types/api.ts",
+          "target": "${types}/api.ts"
         }
       ],
       "dependencies": []
@@ -447,14 +349,15 @@
       "files": [
         {
           "source": "src/items/utils/with-validation/with-validation.ts",
-          "target": "${utils}/with-validation/index.ts"
+          "target": "${utils}/with-validation/with-validation.ts"
         },
         {
           "source": "src/items/errors/handle-errors.ts",
           "target": "${errors}/handle-api-errors.ts"
         }
       ],
-      "dependencies": ["next", "zod", "jose", "format-zod-issues", "normalize-error", "http-errors"]
+      "itemDependencies": ["format-zod-issues", "normalize-error", "http-errors"],
+      "dependencies": ["next", "zod", "jose"]
     }
   ]
 }
