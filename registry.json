@@ -191,7 +191,7 @@
         },
         {
           "source": "src/items/utils/rpc-client/rpc-client.ts",
-          "target": "${utils}/rpc-client/rpc-client.ts"
+          "target": "${utils}/rpc-client/index.ts"
         }
       ]
     },
