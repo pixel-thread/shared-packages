@@ -1,4 +1,4 @@
-import { normalizeUnknownError } from "@src/items/errors";
+import { normalizeUnknownError } from "@src/items/errors/normalize-error/normalize-error";
 import { NextRequest, NextResponse } from "next/server";
 
 

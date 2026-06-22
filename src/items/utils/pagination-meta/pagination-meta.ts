@@ -5,8 +5,8 @@
  * and current page, using an optional or default page size.
  */
 
-import { PAGE_SIZE } from '@src/shared/constants';
-import type { PaginationMeta } from '@src/shared/types';
+import { PAGE_SIZE } from '@src/shared/constants/constants';
+import type { PaginationMeta } from '@src/shared/types/types';
 
 /**
  * Builds pagination metadata from a total count and current page.

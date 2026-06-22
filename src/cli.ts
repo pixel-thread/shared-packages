@@ -19,7 +19,7 @@
 
 import { Command } from 'commander';
 import { multiselect, confirm, isCancel } from '@clack/prompts';
-import { loadRegistry } from './registry/index';
+import { loadRegistry } from './registry/loader';
 import { listItems, addItem, initConfig } from './commands/index';
 import { loadConsumerConfig, CONFIG_FILENAME } from './utils/consumer-config';
 

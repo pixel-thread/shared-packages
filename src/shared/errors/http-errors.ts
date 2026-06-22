@@ -4,13 +4,13 @@
  * Consumers get the real file when they `shared-packages add http-errors`.
  */
 
+export { AppError } from '../../items/errors/http-errors/base';
 export {
-  AppError,
   BadRequestError,
   UnauthorizedError,
   NotFoundError,
   ConflictError,
-  UnprocessableEntityError,
+  UnprocessableError,
   PaymentError,
   TooManyRequestsError,
   ValidationError,

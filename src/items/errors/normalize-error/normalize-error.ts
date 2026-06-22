@@ -8,8 +8,8 @@ import {
   PaymentError,
   UnauthorizedError,
   ValidationError,
-} from '@items/errors/http-errors';
-import  {AppError} from "@items/errors/http-errors/base";
+} from '@items/errors/http-errors/http-errors';
+import { AppError } from "@items/errors/http-errors/base";
 /**
  * Type guard to check if an error is a JWT validation error.
  */

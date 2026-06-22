@@ -22,7 +22,7 @@ import fs from 'fs-extra';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { getPackageRoot } from '../registry/index';
+import { getPackageRoot } from '../registry/loader';
 import type { ConsumerConfig, Registry, RegistryItem } from '../types/index';
 import { detectPackageManager } from '../utils/index';
 import { resolveTarget } from '../utils/consumer-config';

@@ -1,6 +1,7 @@
 import { logger } from '@src/shared/logger';
 import type { NextFunction, Request, Response } from 'express';
-import { AppError, normalizeUnknownError } from '@items/errors';
+import { AppError } from '@items/errors/http-errors/base';
+import { normalizeUnknownError } from '@items/errors/normalize-error/normalize-error';
 
 export function errorHandler(err: unknown, req: Request, res: Response, _next: NextFunction) {
   const reqAny = req as unknown as Record<string, unknown>;

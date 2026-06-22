@@ -317,45 +317,6 @@
       "dependencies": ["jose"]
     },
     {
-      "name": "with-validation",
-      "description": "Next.js route handler validation wrapper with Zod schema support.",
-      "files": [
-        {
-          "source": "src/items/utils/with-validation/with-validation.ts",
-          "target": "${utils}/with-validation/index.ts"
-        },
-        {
-          "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
-          "target": "${utils}/format-zod-issues/format-zod-issues.ts"
-        },
-        {
-          "source": "src/items/utils/format-zod-issues/index.ts",
-          "target": "${utils}/format-zod-issues/index.ts"
-        },
-        {
-          "source": "src/items/errors/index.ts",
-          "target": "${errors}/index.ts"
-        },
-        {
-          "source": "src/items/errors/handle-api-errors.ts",
-          "target": "${errors}/handle-api-errors.ts"
-        },
-        {
-          "source": "src/items/errors/normalize-error/normalize-error.ts",
-          "target": "${errors}/normalize-error.ts"
-        },
-        {
-          "source": "src/items/errors/http-errors/http-errors.ts",
-          "target": "${errors}/http-errors/http-errors.ts"
-        },
-        {
-          "source": "src/items/errors/http-errors/base.ts",
-          "target": "${errors}/http-errors/base.ts"
-        }
-      ],
-      "dependencies": ["next", "zod", "jose"]
-    },
-    {
       "name": "next-middleware",
       "description": "Next.js middleware chain utility with trace-id support.",
       "files": [
@@ -479,6 +440,21 @@
         }
       ],
       "dependencies": []
+    },
+    {
+      "name": "with-validation",
+      "description": "Next.js route handler validation wrapper with Zod schema support.",
+      "files": [
+        {
+          "source": "src/items/utils/with-validation/with-validation.ts",
+          "target": "${utils}/with-validation/index.ts"
+        },
+        {
+          "source": "src/items/errors/handle-errors.ts",
+          "target": "${errors}/handle-api-errors.ts"
+        }
+      ],
+      "dependencies": ["next", "zod", "jose", "format-zod-issues", "normalize-error", "http-errors"]
     }
   ]
 }
