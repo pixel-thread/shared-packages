@@ -369,12 +369,25 @@
       "dependencies": ["jose", "zod"]
     },
     {
+      "name": "express-validate",
+      "description": "Express middleware validating req.body, req.query, and req.params with Zod schemas.",
+      "files": [
+        {
+          "source": "src/items/middleware/express-validate/express-validate.ts",
+          "target": "${middleware}/express-validate/express-validate.ts"
+        }
+      ],
+      "itemDependencies": ["http-errors", "format-zod-issues"],
+      "dependencies": ["express", "zod"],
+      "devDependencies": ["@types/express"]
+    },
+    {
       "name": "express-error-handler",
       "description": "Express error handling middleware that normalizes errors into a consistent JSON response.",
       "files": [
         {
           "source": "src/items/errors/error-handler/error-handler.ts",
-          "target": "${errors}/error-handler/error-handler.ts"
+          "target": "${middleware}/error-handler.ts"
         }
       ],
       "itemDependencies": ["http-errors", "normalize-error"],
