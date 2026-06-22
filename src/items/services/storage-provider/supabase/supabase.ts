@@ -28,6 +28,7 @@ export class SupabaseStorageProvider implements StorageProvider {
   }
 
   async getPublicUrl(fileKey: string) {
-    return this.supabase.storage.from(process.env.STORAGE_BUCKET!).getPublicUrl(fileKey).data.publicUrl;
+    return this.supabase.storage.from(process.env.STORAGE_BUCKET!).getPublicUrl(fileKey).data
+      .publicUrl;
   }
 }

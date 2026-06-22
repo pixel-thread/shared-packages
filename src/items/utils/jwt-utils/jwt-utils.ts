@@ -22,9 +22,7 @@ export async function signJwt(
   secret: string,
   options?: SignJwtOptions,
 ): Promise<string> {
-  const jwt = new SignJWT(payload)
-    .setProtectedHeader({ alg: 'HS256' })
-    .setIssuedAt();
+  const jwt = new SignJWT(payload).setProtectedHeader({ alg: 'HS256' }).setIssuedAt();
 
   if (options?.expiresIn) jwt.setExpirationTime(options.expiresIn);
   if (options?.audience) jwt.setAudience(options.audience);
@@ -46,16 +44,10 @@ export function decodeJwt(token: string): JwtPayload {
   return joseDecode(token) as JwtPayload;
 }
 
-export async function createAccessToken(
-  payload: JwtPayload,
-  secret: string,
-): Promise<string> {
+export async function createAccessToken(payload: JwtPayload, secret: string): Promise<string> {
   return signJwt(payload, secret, { expiresIn: '15m' });
 }
 
-export async function createRefreshToken(
-  payload: JwtPayload,
-  secret: string,
-): Promise<string> {
+export async function createRefreshToken(payload: JwtPayload, secret: string): Promise<string> {
   return signJwt(payload, secret, { expiresIn: '7d' });
 }

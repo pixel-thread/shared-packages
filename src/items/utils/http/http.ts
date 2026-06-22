@@ -5,10 +5,10 @@
  * and typed response shapes. Each method returns a consistent {@link ApiResponse} shape.
  */
 
-import  { AxiosRequestConfig } from "axios";
-import { ApiResponse } from "@items/types/api";
-import { handleResponse, handleAxiosError } from "./response";
-import apiClient from "./client";
+import { AxiosRequestConfig } from 'axios';
+import { ApiResponse } from '@items/types/api';
+import { handleResponse, handleAxiosError } from './response';
+import apiClient from './client';
 
 /**
  * Typed HTTP client with `get`, `post`, `put`, and `delete` methods.
@@ -34,12 +34,9 @@ export const http = {
    * @param config - Optional Axios request config.
    * @returns A promise resolving to a typed {@link ApiResponse}.
    */
-  get: async <T>(
-    url: string,
-    config?: AxiosRequestConfig,
-  ): Promise<ApiResponse<T>> => {
+  get: async <T>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> => {
     try {
-      const response = await  apiClient.get(url, config);
+      const response = await apiClient.get(url, config);
       return handleResponse<T>(response);
     } catch (error) {
       return handleAxiosError<T>(error);
@@ -60,7 +57,7 @@ export const http = {
     config?: AxiosRequestConfig,
   ): Promise<ApiResponse<T>> => {
     try {
-      const response = await  apiClient.post(url, data, config);
+      const response = await apiClient.post(url, data, config);
       return handleResponse<T>(response);
     } catch (error) {
       return handleAxiosError<T>(error);
@@ -95,10 +92,7 @@ export const http = {
    * @param config - Optional Axios request config.
    * @returns A promise resolving to a typed {@link ApiResponse}.
    */
-  delete: async <T>(
-    url: string,
-    config?: AxiosRequestConfig,
-  ): Promise<ApiResponse<T>> => {
+  delete: async <T>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> => {
     try {
       const response = await apiClient.delete(url, config);
       return handleResponse<T>(response);

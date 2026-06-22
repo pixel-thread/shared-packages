@@ -27,7 +27,7 @@
  */
 export function buildUrlWithQuery(
   url: string,
-  query: Record<string, string | number | boolean | null | undefined>
+  query: Record<string, string | number | boolean | null | undefined>,
 ): string {
   const isAbsolute = url.startsWith('http://') || url.startsWith('https://');
   const dummyBase = 'http://localhost';

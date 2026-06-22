@@ -33,7 +33,7 @@ export type RpcRequest<TParams = unknown> = {
  */
 export const rpc = async <TResult, TParams = unknown>(
   method: string,
-  params?: TParams
+  params?: TParams,
 ): Promise<ApiResponse<TResult>> => {
   return http.post<TResult>('/rpc', {
     method,

@@ -10,9 +10,7 @@ export function validateEnv<T extends z.ZodRawShape>(
 ): z.infer<z.ZodObject<T>> {
   const result = schema.safeParse(env);
   if (!result.success) {
-    const missing = result.error.issues
-      .map(i => i.path.join('.'))
-      .join(', ');
+    const missing = result.error.issues.map((i) => i.path.join('.')).join(', ');
     throw new Error(`Environment validation failed: ${missing}`);
   }
   return result.data;

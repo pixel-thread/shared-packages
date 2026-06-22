@@ -8,11 +8,7 @@ export interface CookieOptions {
   maxAge?: number;
 }
 
-export function serializeCookie(
-  name: string,
-  value: string,
-  options?: CookieOptions,
-): string {
+export function serializeCookie(name: string, value: string, options?: CookieOptions): string {
   const parts = [`${encodeURIComponent(name)}=${encodeURIComponent(value)}`];
 
   if (options?.httpOnly) parts.push('HttpOnly');
@@ -26,11 +22,7 @@ export function serializeCookie(
   return parts.join('; ');
 }
 
-export function setCookie(
-  name: string,
-  value: string,
-  options?: CookieOptions,
-): string {
+export function setCookie(name: string, value: string, options?: CookieOptions): string {
   const defaults: CookieOptions = {
     httpOnly: true,
     secure: true,

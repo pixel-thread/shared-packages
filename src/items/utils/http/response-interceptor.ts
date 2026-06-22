@@ -6,12 +6,7 @@
  * refresh flow and return directly to the caller.
  */
 
-import type {
-  AxiosError,
-  AxiosInstance,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from 'axios';
+import type { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { isAuthPath } from './constants';
 import {
   isRefreshing,

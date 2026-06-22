@@ -1,11 +1,12 @@
 import * as crypto from 'crypto';
+import { AppError } from '@items/errors/http-errors';
 
 const ALGORITHM = 'aes-256-gcm';
 
 const ENCRYPTION_KEY = process.env.FIELD_ENCRYPTION_KEY;
 
 if (!ENCRYPTION_KEY) {
-  throw new Error('FIELD_ENCRYPTION_KEY environment variable is required');
+  throw new AppError('400', 'FIELD_ENCRYPTION_KEY environment variable is required');
 }
 
 const KEY = Buffer.from(ENCRYPTION_KEY, 'hex');
@@ -28,7 +29,7 @@ export const decrypt = (ciphertext: string): string => {
   const parts = ciphertext.split(':');
 
   if (parts.length !== 3) {
-    throw new Error(`Invalid encrypted value format`);
+    throw new AppError('400', `Invalid encrypted value format`);
   }
 
   const [ivHex, tagHex, encHex] = parts;
@@ -45,6 +46,6 @@ export const decrypt = (ciphertext: string): string => {
 
     return decrypted.toString('utf8');
   } catch {
-    throw new Error('Failed to decrypt value');
+    throw new AppError('500', 'Failed to decrypt value');
   }
 };

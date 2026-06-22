@@ -1,4 +1,3 @@
-
 /**
  * @file Project-wide shared TypeScript types and interfaces.
  *

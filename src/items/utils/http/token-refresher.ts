@@ -60,12 +60,10 @@ export const refreshToken = async (): Promise<string> => {
     throw new Error('No refresh token available');
   }
 
-
   const response = await apiClient.post<{ data?: RefreshResponse }>(
     `${API_BASE_URL}/auth/refresh`,
     { token: refreshTokenValue },
   );
-
 
   const newAccessToken = response.data.data?.access_token ?? '';
 

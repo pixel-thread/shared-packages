@@ -1,7 +1,6 @@
 import { errors } from 'jose';
 import { ZodError } from 'zod';
 
-
 import {
   BadRequestError,
   NotFoundError,
@@ -9,7 +8,7 @@ import {
   UnauthorizedError,
   ValidationError,
 } from '@items/errors/http-errors/http-errors';
-import { AppError } from "@items/errors/http-errors/base";
+import { AppError } from '@items/errors/http-errors/base';
 /**
  * Type guard to check if an error is a JWT validation error.
  */
@@ -44,7 +43,7 @@ export function isSupabaseStorageError(error: unknown): boolean {
  * @returns A typed AppError with the appropriate status code and message.
  */
 export const normalizeUnknownError = (error: unknown): AppError => {
-  const isProd = (process.env?.NODE_ENV ) === 'production';
+  const isProd = process.env?.NODE_ENV === 'production';
 
   if (isJwtError(error)) {
     return new UnauthorizedError(error.message);

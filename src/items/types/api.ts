@@ -1,5 +1,4 @@
-
-import { PaginationMeta } from "./pagination-meta";
+import { PaginationMeta } from './pagination-meta';
 
 /**
  * @file Shared API type definitions for HTTP client responses.
@@ -7,7 +6,6 @@ import { PaginationMeta } from "./pagination-meta";
  * These types define the standardised envelope returned by every
  * API call through the HTTP client and RPC utilities.
  */
-
 
 export interface ApiResponse<T> {
   /** Whether the request was processed successfully. */
@@ -35,7 +33,7 @@ export interface ApiResponse<T> {
  */
 
 /** Supported HTTP methods used in API request configuration. */
-export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 /** A map of header name to header value. */
 export type HeadersMap = Record<string, string>;

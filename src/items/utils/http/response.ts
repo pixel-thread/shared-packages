@@ -5,8 +5,8 @@
  * raw Axios responses and errors into the standardised {@link ApiResponse} shape.
  */
 
-import { AxiosError, AxiosResponse } from "axios";
-import { ApiResponse } from "@items/types/api";
+import { AxiosError, AxiosResponse } from 'axios';
+import { ApiResponse } from '@items/types/api';
 
 /**
  * Transforms an unknown error into a standard error {@link ApiResponse}.
@@ -20,20 +20,18 @@ import { ApiResponse } from "@items/types/api";
  * @returns A standardised error response with `success: false`.
  */
 export const handleAxiosError = <T>(error: unknown): ApiResponse<T> => {
-  let errorMessage = "Something went wrong. Please try again.";
-  let errorDetails: string | Record<string, unknown> = "";
+  let errorMessage = 'Something went wrong. Please try again.';
+  let errorDetails: string | Record<string, unknown> = '';
 
   if (error instanceof AxiosError) {
     if (error.response) {
-      errorMessage =
-        (error.response.data as { message?: string })?.message || errorMessage;
+      errorMessage = (error.response.data as { message?: string })?.message || errorMessage;
       errorDetails =
-        (error.response.data as { error?: string | Record<string, unknown> })
-          ?.error ||
+        (error.response.data as { error?: string | Record<string, unknown> })?.error ||
         error.response.data ||
-        "";
+        '';
     } else if (error.request) {
-      errorMessage = "Please check your internet connection.";
+      errorMessage = 'Please check your internet connection.';
     } else {
       errorMessage = error.message;
     }
@@ -57,9 +55,7 @@ export const handleAxiosError = <T>(error: unknown): ApiResponse<T> => {
  * @param response - The Axios response object.
  * @returns A standardised success response.
  */
-export const handleResponse = <T>(
-  response: AxiosResponse<ApiResponse<T>>,
-): ApiResponse<T> => {
+export const handleResponse = <T>(response: AxiosResponse<ApiResponse<T>>): ApiResponse<T> => {
   const {
     status,
     data: { data, message, meta },

@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { API_BASE_URL } from './constants';
 import { createRequestInterceptor } from './request-interceptor';
@@ -20,4 +19,3 @@ apiClient.interceptors.request.use(createRequestInterceptor());
 apiClient.interceptors.response.use(...createResponseInterceptor(apiClient));
 
 export default apiClient;
-

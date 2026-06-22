@@ -20,7 +20,6 @@ export class SftpStorageProvider implements StorageProvider {
     const sftp = new SftpClient('upload-client');
     const config = getSftpConfig();
 
-
     try {
       await sftp.connect(config);
     } catch (error) {
@@ -29,7 +28,12 @@ export class SftpStorageProvider implements StorageProvider {
     }
 
     const key = `${params.folder}/${Date.now()}-${params.fileName}`;
-    const remotePath = path.posix.join('/', process.env.SFTP_ROOT!, process.env.STORAGE_BUCKET!, key);
+    const remotePath = path.posix.join(
+      '/',
+      process.env.SFTP_ROOT!,
+      process.env.STORAGE_BUCKET!,
+      key,
+    );
     const remoteDir = path.posix.dirname(remotePath);
 
     try {
@@ -39,8 +43,7 @@ export class SftpStorageProvider implements StorageProvider {
     } catch (error) {
       throw error;
     } finally {
-      await sftp
-        .end()
+      await sftp.end();
     }
 
     const url = key;
@@ -53,7 +56,9 @@ export class SftpStorageProvider implements StorageProvider {
 
     try {
       await sftp.connect(getSftpConfig());
-      await sftp.delete(path.posix.join('/', process.env.SFTP_ROOT!, process.env.STORAGE_BUCKET!, fileKey));
+      await sftp.delete(
+        path.posix.join('/', process.env.SFTP_ROOT!, process.env.STORAGE_BUCKET!, fileKey),
+      );
     } finally {
       await sftp.end().catch(() => {});
     }
