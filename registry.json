@@ -8,7 +8,7 @@
       "files": [
         {
           "source": "src/items/schemas/user-schema/user.schema.ts",
-          "target": "${validation}/user.schema.ts"
+          "target": "${validation}/user-schema/user.schema.ts"
         }
       ],
       "dependencies": ["zod"]
@@ -19,7 +19,7 @@
       "files": [
         {
           "source": "src/items/errors/api-error/api-error.ts",
-          "target": "${errors}/api-error.ts"
+          "target": "${errors}/api-error/api-error.ts"
         }
       ]
     },
@@ -39,7 +39,7 @@
       "files": [
         {
           "source": "src/items/utils/url-utils/url-utils.ts",
-          "target": "${utils}/url-utils.ts"
+          "target": "${utils}/url-utils/url-utils.ts"
         }
       ]
     },
@@ -60,7 +60,7 @@
       "files": [
         {
           "source": "src/items/utils/formatters/formatters.ts",
-          "target": "${utils}/formatters.ts"
+          "target": "${utils}/formatters/formatters.ts"
         }
       ]
     },
@@ -71,7 +71,7 @@
       "files": [
         {
           "source": "src/items/utils/pagination-params/pagination-params.ts",
-          "target": "${utils}/pagination-params.ts"
+          "target": "${utils}/pagination-params/pagination-params.ts"
         }
       ]
     },
@@ -82,7 +82,7 @@
       "files": [
         {
           "source": "src/items/utils/pagination-meta/pagination-meta.ts",
-          "target": "${utils}/pagination-meta.ts"
+          "target": "${utils}/pagination-meta/pagination-meta.ts"
         }
       ]
     },
@@ -92,11 +92,11 @@
       "files": [
         {
           "source": "src/items/errors/http-errors/base.ts",
-          "target": "${errors}/base.ts"
+          "target": "${errors}/http-errors/base.ts"
         },
         {
           "source": "src/items/errors/http-errors/http-errors.ts",
-          "target": "${errors}/http-errors.ts"
+          "target": "${errors}/http-errors/http-errors.ts"
         }
       ]
     },
@@ -128,35 +128,39 @@
       "files": [
         {
           "source": "src/items/utils/http-client/constants.ts",
-          "target": "${api}/constants.ts"
+          "target": "${utils}/http-client/constants.ts"
         },
         {
           "source": "src/items/utils/http-client/client.ts",
-          "target": "${api}/client.ts"
+          "target": "${utils}/http-client/client.ts"
         },
         {
           "source": "src/items/utils/http-client/http.ts",
-          "target": "${api}/http.ts"
+          "target": "${utils}/http-client/http.ts"
         },
         {
           "source": "src/items/utils/http-client/request-interceptor.ts",
-          "target": "${api}/request-interceptor.ts"
+          "target": "${utils}/http-client/request-interceptor.ts"
         },
         {
           "source": "src/items/utils/http-client/response.ts",
-          "target": "${api}/response.ts"
+          "target": "${utils}/http-client/response.ts"
         },
         {
           "source": "src/items/utils/http-client/response-interceptor.ts",
-          "target": "${api}/response-interceptor.ts"
+          "target": "${utils}/http-client/response-interceptor.ts"
         },
         {
           "source": "src/items/utils/http-client/session-expired-handler.ts",
-          "target": "${api}/session-expired-handler.ts"
+          "target": "${utils}/http-client/session-expired-handler.ts"
         },
         {
           "source": "src/items/utils/http-client/token-refresher.ts",
-          "target": "${api}/token-refresher.ts"
+          "target": "${utils}/http-client/token-refresher.ts"
+        },
+        {
+          "source": "src/items/utils/http-client/index.ts",
+          "target": "${utils}/http-client/index.ts"
         },
         {
           "source": "src/shared/types/api.ts",
@@ -179,10 +183,15 @@
     {
       "name": "rpc-client",
       "description": "RPC client using HTTP POST to /rpc endpoint.",
+      "itemDependencies": ["http-client"],
       "files": [
         {
+          "source": "src/items/utils/rpc-client/index.ts",
+          "target": "${utils}/rpc-client/index.ts"
+        },
+        {
           "source": "src/items/utils/rpc-client/rpc-client.ts",
-          "target": "${api}/rpc-client.ts"
+          "target": "${utils}/rpc-client/rpc-client.ts"
         }
       ]
     },
@@ -192,7 +201,7 @@
       "files": [
         {
           "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
-          "target": "${utils}/format-zod-issues.ts"
+          "target": "${utils}/format-zod-issues/format-zod-issues.ts"
         }
       ],
       "dependencies": ["zod"]
@@ -233,7 +242,7 @@
       "files": [
         {
           "source": "src/items/errors/normalize-error/normalize-error.ts",
-          "target": "${errors}/normalize-error.ts"
+          "target": "${errors}/normalize-error/normalize-error.ts"
         }
       ],
       "itemDependencies": ["http-errors"],

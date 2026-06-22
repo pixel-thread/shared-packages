@@ -7,7 +7,7 @@
  */
 
 import type { ApiResponse } from '@shared/types/api';
-import { http } from './http';
+import { http } from '../http-client';
 
 /** A generic RPC request payload. */
 export type RpcRequest<TParams = unknown> = {
