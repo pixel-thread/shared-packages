@@ -11,11 +11,10 @@ import { fileURLToPath } from 'node:url';
 import type { Registry, RegistryItem } from '../types/index';
 
 /**
- * Resolves the absolute path to the package root directory.
+ * Resolves the absolute path to the package root directory by walking up
+ * from the current module until it finds `registry.json`.
  *
- * Uses `import.meta.url` to locate the current module's location on disk,
- * then traverses up to the package root. The number of parent directories
- * depends on the depth of this module within `dist/`.
+ * Works in both development (via `tsx`) and production (bundled `dist/cli.js`).
  *
  * @returns The absolute path to the package root directory.
  *
@@ -27,8 +26,16 @@ import type { Registry, RegistryItem } from '../types/index';
  */
 export function getPackageRoot(): string {
   const currentFilePath = fileURLToPath(import.meta.url);
-  const currentDirectory = path.dirname(currentFilePath);
-  return path.resolve(currentDirectory, '..');
+  let dir = path.dirname(currentFilePath);
+
+  while (dir !== path.dirname(dir)) {
+    if (fs.existsSync(path.join(dir, 'registry.json'))) {
+      return dir;
+    }
+    dir = path.dirname(dir);
+  }
+
+  throw new Error('Could not find registry.json — verify the package is installed correctly.');
 }
 
 /**

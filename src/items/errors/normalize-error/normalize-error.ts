@@ -9,7 +9,7 @@ import {
   UnauthorizedError,
   ValidationError,
   AppError
-} from './http-errors';
+} from '@items/errors/http-errors';
 
 /**
  * Type guard to check if an error is a JWT validation error.
