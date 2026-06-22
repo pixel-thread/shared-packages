@@ -259,6 +259,64 @@
       "dependencies": ["zod"]
     },
     {
+      "name": "cookie-utils",
+      "description": "Server-side cookie serialization and parsing with secure defaults.",
+      "files": [
+        {
+          "source": "src/items/utils/cookie-utils/cookie-utils.ts",
+          "target": "${utils}/cookie/cookie-utils.ts"
+        },
+        {
+          "source": "src/items/utils/cookie-utils/index.ts",
+          "target": "${utils}/cookie/index.ts"
+        }
+      ]
+    },
+    {
+      "name": "date-utils",
+      "description": "Date math helpers using plain Date APIs.",
+      "files": [
+        {
+          "source": "src/items/utils/date-utils/date-utils.ts",
+          "target": "${utils}/date/date-utils.ts"
+        },
+        {
+          "source": "src/items/utils/date-utils/index.ts",
+          "target": "${utils}/date/index.ts"
+        }
+      ]
+    },
+    {
+      "name": "env-validator",
+      "description": "Zod-based environment variable validation with pre-built schemas.",
+      "files": [
+        {
+          "source": "src/items/utils/env-validator/env-validator.ts",
+          "target": "${utils}/env-validator/env-validator.ts"
+        },
+        {
+          "source": "src/items/utils/env-validator/index.ts",
+          "target": "${utils}/env-validator/index.ts"
+        }
+      ],
+      "dependencies": ["zod"]
+    },
+    {
+      "name": "jwt-utils",
+      "description": "JWT sign, verify, and decode helpers using jose.",
+      "files": [
+        {
+          "source": "src/items/utils/jwt-utils/jwt-utils.ts",
+          "target": "${utils}/jwt/jwt-utils.ts"
+        },
+        {
+          "source": "src/items/utils/jwt-utils/index.ts",
+          "target": "${utils}/jwt/index.ts"
+        }
+      ],
+      "dependencies": ["jose"]
+    },
+    {
       "name": "with-validation",
       "description": "Next.js route handler validation wrapper with Zod schema support.",
       "files": [
