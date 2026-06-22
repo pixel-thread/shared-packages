@@ -6,8 +6,7 @@
  * via a `POST /logs` endpoint for centralised log aggregation.
  */
 
-import axios from "axios";
-
+import {apiClient} from "@items/utils/http";
 /** Log severity levels. */
 type ErrorType = "ERROR" | "INFO" | "WARN" | "LOG";
 
@@ -31,7 +30,7 @@ const sendLogToServer = async (
   };
 
   try {
-    await axios.post("/logs", logEntry);
+    await apiClient.post("/logs", logEntry);
   } catch (error) {
     console.log("Failed to send logs to server", error);
   }

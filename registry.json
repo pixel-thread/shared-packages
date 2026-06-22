@@ -29,7 +29,7 @@
       "files": [
         {
           "source": "src/items/utils/url-utils/url-utils.ts",
-          "target": "${utils}/url-utils/url-utils.ts"
+          "target": "${utils}/url/index.ts"
         }
       ]
     },
@@ -96,7 +96,7 @@
       "files": [
         {
           "source": "src/items/utils/regex-patterns/regex-patterns.ts",
-          "target": "${validation}/regex-patterns/regex-patterns.ts"
+          "target": "${utils}/constants/regex-patterns.ts"
         }
       ]
     },
@@ -117,36 +117,40 @@
       "description": "Axios HTTP client wrapper with typed responses, interceptors, and token refresh support.",
       "files": [
         {
-          "source": "src/items/utils/http-client/constants.ts",
-          "target": "${utils}/http-client/constants.ts"
+          "source": "src/items/utils/http/constants.ts",
+          "target": "${utils}/http/constants.ts"
         },
         {
-          "source": "src/items/utils/http-client/client.ts",
-          "target": "${utils}/http-client/client.ts"
+          "source": "src/items/utils/http/index.ts",
+          "target": "${utils}/http/index.ts"
         },
         {
-          "source": "src/items/utils/http-client/http.ts",
-          "target": "${utils}/http-client/http.ts"
+          "source": "src/items/utils/http/client.ts",
+          "target": "${utils}/http/client.ts"
         },
         {
-          "source": "src/items/utils/http-client/request-interceptor.ts",
-          "target": "${utils}/http-client/request-interceptor.ts"
+          "source": "src/items/utils/http/http.ts",
+          "target": "${utils}/http/http.ts"
         },
         {
-          "source": "src/items/utils/http-client/response.ts",
-          "target": "${utils}/http-client/response.ts"
+          "source": "src/items/utils/http/request-interceptor.ts",
+          "target": "${utils}/http/request-interceptor.ts"
         },
         {
-          "source": "src/items/utils/http-client/response-interceptor.ts",
-          "target": "${utils}/http-client/response-interceptor.ts"
+          "source": "src/items/utils/http/response.ts",
+          "target": "${utils}/http/response.ts"
         },
         {
-          "source": "src/items/utils/http-client/session-expired-handler.ts",
-          "target": "${utils}/http-client/session-expired-handler.ts"
+          "source": "src/items/utils/http/response-interceptor.ts",
+          "target": "${utils}/http/response-interceptor.ts"
         },
         {
-          "source": "src/items/utils/http-client/token-refresher.ts",
-          "target": "${utils}/http-client/token-refresher.ts"
+          "source": "src/items/utils/http/session-expired-handler.ts",
+          "target": "${utils}/http/session-expired-handler.ts"
+        },
+        {
+          "source": "src/items/utils/http/token-refresher.ts",
+          "target": "${utils}/http/token-refresher.ts"
         },
         {
           "source": "src/shared/types/api.ts",
@@ -158,10 +162,11 @@
     {
       "name": "client-logger",
       "description": "Client-side logger that logs to console in dev and sends to server in production.",
+      "itemDependencies": ["http-client"],
       "files": [
         {
           "source": "src/items/utils/client-logger/client-logger.ts",
-          "target": "${utils}/client-logger/client-logger.ts"
+          "target": "${utils}/client-logger/index.ts"
         }
       ],
       "dependencies": ["axios"]
@@ -172,8 +177,8 @@
       "itemDependencies": ["http-client"],
       "files": [
         {
-          "source": "src/items/utils/rpc-client/rpc-client.ts",
-          "target": "${utils}/rpc-client/rpc-client.ts"
+          "source": "src/items/utils/rpc/rpc-client.ts",
+          "target": "${utils}/rpc/index.ts"
         }
       ]
     },
