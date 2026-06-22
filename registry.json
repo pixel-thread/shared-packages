@@ -99,6 +99,16 @@
       ]
     },
     {
+      "name": "encryption",
+      "description": "AES-256-GCM field-level encryption and decryption utilities.",
+      "files": [
+        {
+          "source": "src/items/lib/encryption/encryption.ts",
+          "target": "src/shared/libs/encryption/index.ts"
+        }
+      ]
+    },
+    {
       "name": "user-schema",
       "description": "Zod schema and types for creating a user.",
       "files": [
