@@ -353,7 +353,7 @@
         },
         {
           "source": "src/items/errors/handle-errors.ts",
-          "target": "${errors}/handle-api-errors.ts"
+          "target": "${errors}/handle-errors.ts"
         }
       ],
       "itemDependencies": ["format-zod-issues", "normalize-error", "http-errors"],
