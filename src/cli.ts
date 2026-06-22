@@ -12,10 +12,12 @@
  * ```bash
  * shared-packages list
  * shared-packages add <item-name> [--overwrite] [--skip-install]
+ * shared-packages add                         # interactive toggle mode
  * ```
  */
 
 import { Command } from 'commander';
+import { multiselect, confirm, isCancel } from '@clack/prompts';
 import { loadRegistry } from './registry/index';
 import { listItems, addItem } from './commands/index';
 
@@ -38,21 +40,62 @@ program
 
 program
   .command('add')
-  .description('Copy one registry item into the current project.')
-  .argument('<item-name>', 'Registry item name')
+  .description('Copy registry items into the current project.')
+  .argument('[item-name]', 'Registry item name (omit for interactive toggle)')
   .option('-o, --overwrite', 'Overwrite existing files')
   .option('--skip-install', 'Do not install item dependencies')
-  .action(async (itemName: string, options: { overwrite?: boolean; skipInstall?: boolean }) => {
-    const item = registry.items.find((entry) => entry.name === itemName);
+  .action(
+    async (
+      itemName: string | undefined,
+      options: { overwrite?: boolean; skipInstall?: boolean },
+    ) => {
+      if (itemName) {
+        const item = registry.items.find((entry) => entry.name === itemName);
+        if (!item) {
+          console.error(`Item "${itemName}" was not found.`);
+          console.error('Run `shared-packages list` to see available items.');
+          process.exitCode = 1;
+          return;
+        }
+        await addItem(item, options);
+        return;
+      }
 
-    if (!item) {
-      console.error(`Item "${itemName}" was not found.`);
-      console.error('Run `shared-packages list` to see available items.');
-      process.exitCode = 1;
-      return;
-    }
+      const selected = await multiselect({
+        message: 'Select items to add:',
+        options: registry.items.map((item) => ({
+          value: item.name,
+          label: item.description,
+        })),
+      });
 
-    await addItem(item, options);
-  });
+      if (isCancel(selected)) {
+        console.log('Cancelled.');
+        process.exitCode = 0;
+        return;
+      }
+
+      if (selected.length === 0) {
+        console.log('No items selected.');
+        return;
+      }
+
+      const proceed = await confirm({
+        message: `Add ${selected.length} item${selected.length === 1 ? '' : 's'}?`,
+      });
+
+      if (isCancel(proceed) || !proceed) {
+        console.log('Cancelled.');
+        return;
+      }
+
+      const itemsToAdd = registry.items.filter((entry) => selected.includes(entry.name));
+
+      for (const item of itemsToAdd) {
+        console.log(`\n── ${item.name} ──`);
+        await addItem(item, options);
+      }
+    },
+  );
 
 program.parse();
