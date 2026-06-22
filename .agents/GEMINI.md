@@ -137,6 +137,7 @@ src/
 │   ├── errors/
 │   ├── schemas/
 │   ├── lib/
+│   ├── services/
 │   └── utils/
 ├── registry/     ← Registry loading & path resolution
 ├── types/        ← Shared TypeScript types
@@ -172,6 +173,7 @@ src/items/<category>/<item-name>/
 | `errors/`   | Error classes and error utilities     |
 | `schemas/`  | Zod schemas and validation patterns   |
 | `lib/`      | Infrastructure wrappers (Prisma, etc.)|
+| `services/` | Service-layer providers (storage, etc.)|
 | `utils/`    | General-purpose utilities and clients |
 
 ---

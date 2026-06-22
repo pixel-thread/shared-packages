@@ -208,15 +208,31 @@
       "dependencies": ["jose", "zod"]
     },
     {
-      "name": "common-schemas",
-      "description": "Reusable Zod schemas for UUID, page size, and page number validation.",
+      "name": "storage-provider",
+      "description": "Dynamic storage provider pattern — Supabase or SFTP, selected by STORAGE_PROVIDER env var.",
       "files": [
         {
-          "source": "src/items/schemas/common-schemas/common-schemas.ts",
-          "target": "src/shared/validation/common-schemas.ts"
+          "source": "src/items/services/storage-provider/types.ts",
+          "target": "src/shared/services/storage/types.ts"
+        },
+        {
+          "source": "src/items/services/storage-provider/sftp.ts",
+          "target": "src/shared/services/storage/sftp.ts"
+        },
+        {
+          "source": "src/items/services/storage-provider/supabase.ts",
+          "target": "src/shared/services/storage/supabase.ts"
+        },
+        {
+          "source": "src/items/services/storage-provider/get-storage-provider.ts",
+          "target": "src/shared/services/storage/get-storage-provider.ts"
+        },
+        {
+          "source": "src/items/services/storage-provider/index.ts",
+          "target": "src/shared/services/storage/index.ts"
         }
       ],
-      "dependencies": ["zod"]
+      "dependencies": ["ssh2-sftp-client", "@supabase/supabase-js"]
     }
   ]
 }
