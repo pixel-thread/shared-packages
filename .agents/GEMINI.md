@@ -80,51 +80,48 @@ These rules apply to every layer: routes, services, handlers, validators.
 
 ## Naming Conventions
 
-### File and Folder Names — `kebab-case` (MANDATORY)
+### File and Folder Names — `kebab-case` (STRICT — NO EXCEPTIONS)
 
-Every file and every folder in the project uses `kebab-case`. No exceptions.
-
-```
-✅ create-module.ts
-✅ find-many-meetings.ts
-✅ meeting-query.validator.ts
-✅ audit-log.service.ts
-```
-
-### Route Handler Functions — `camelCase` with method prefix
+Every file and every folder in the project must use `kebab-case`. This applies to all item source files, command files, registry files, and any other file in the project. Files with uppercase letters, underscores, or spaces will be rejected.
 
 ```
-File:   features/auth/routes/sign-in.route.ts
-Export: export const postSignIn: RequestHandler[] = [...]
+✅ with-validation.ts
+✅ handle-api-errors.ts
+✅ format-zod-issues.ts
+✅ with-trace-id.ts
+✅ http-client/http.ts
+
+❌ withValidation.ts       (camelCase — rejected)
+❌ handleApiErrors.ts      (camelCase — rejected)
+❌ with_trace_id.ts        (snake_case — rejected)
+❌ WithValidation.ts       (PascalCase — rejected)
 ```
 
-### Services — `kebab-case` file, `camelCase` exported function
+### Exported Functions — `camelCase`
 
 ```
-File:   features/training/services/create-module.ts
-Export: export async function createModule(...)
+File:   src/commands/add.ts
+Export: export async function addItem(item, options)
 ```
 
-### Validators — `kebab-case` file, `PascalCase` Zod schema export
+### Zod Schemas — `PascalCase`
 
 ```
-File:   features/training/validators/create-module.validator.ts
-Export: export const CreateModuleSchema = z.object({...})
+File:   src/items/schemas/user-schema/user.schema.ts
+Export: export const CreateUserSchema = z.object({...})
 ```
 
 ### Summary Table
 
-| Item                        | Convention             | Example                      |
-| --------------------------- | ---------------------- | ---------------------------- |
-| Folders                     | `kebab-case`           | `membership-applications/`   |
-| Files                       | `kebab-case`           | `create-module.ts`           |
-| Service functions           | `camelCase`            | `createModule()`             |
-| Zod schemas                 | `PascalCase`           | `CreateModuleSchema`         |
-| TypeScript types/interfaces | `PascalCase`           | `TrainingModule`             |
-| Constants                   | `SCREAMING_SNAKE_CASE` | `ADMIN_ROUTES`               |
-| Route segments              | `kebab-case`           | `/api/v1/training-modules`   |
-| Prisma model names          | `PascalCase`           | `User`                       |
-| Prisma field names          | `camelCase`            | `createdAt`, `associationId` |
+| Item              | Convention             | Example                              |
+| ----------------- | ---------------------- | ------------------------------------ |
+| Folders           | `kebab-case`           | `src/items/utils/http-client/`       |
+| Files             | `kebab-case` (strict)  | `with-validation.ts`                 |
+| Exported functions| `camelCase`            | `addItem()`, `handleApiErrors()`     |
+| Zod schemas       | `PascalCase`           | `CreateUserSchema`                   |
+| Types/interfaces  | `PascalCase`           | `ApiResponse`, `MiddlewareFn`        |
+| Constants         | `SCREAMING_SNAKE_CASE` | `PAGE_SIZE`                          |
+| Item names        | `kebab-case`           | `user-schema`, `http-errors`         |
 
 ---
 
