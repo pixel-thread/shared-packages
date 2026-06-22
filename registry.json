@@ -9,6 +9,10 @@
         {
           "source": "src/items/schemas/user-schema/user.schema.ts",
           "target": "${validation}/user-schema/user.schema.ts"
+        },
+        {
+          "source": "src/items/schemas/user-schema/index.ts",
+          "target": "${validation}/user-schema/index.ts"
         }
       ],
       "dependencies": ["zod"]
@@ -20,6 +24,10 @@
         {
           "source": "src/items/errors/api-error/api-error.ts",
           "target": "${errors}/api-error/api-error.ts"
+        },
+        {
+          "source": "src/items/errors/api-error/index.ts",
+          "target": "${errors}/api-error/index.ts"
         }
       ]
     },
@@ -30,6 +38,10 @@
         {
           "source": "src/items/utils/pagination/pagination.ts",
           "target": "${pagination}/pagination.ts"
+        },
+        {
+          "source": "src/items/utils/pagination/index.ts",
+          "target": "${pagination}/index.ts"
         }
       ]
     },
@@ -40,6 +52,10 @@
         {
           "source": "src/items/utils/url-utils/url-utils.ts",
           "target": "${utils}/url-utils/url-utils.ts"
+        },
+        {
+          "source": "src/items/utils/url-utils/index.ts",
+          "target": "${utils}/url-utils/index.ts"
         }
       ]
     },
@@ -50,6 +66,10 @@
         {
           "source": "src/items/utils/async-handler/async-handler.ts",
           "target": "${middleware}/async-handler.ts"
+        },
+        {
+          "source": "src/items/utils/async-handler/index.ts",
+          "target": "${middleware}/async-handler/index.ts"
         }
       ],
       "dependencies": ["express"]
@@ -61,6 +81,10 @@
         {
           "source": "src/items/utils/formatters/formatters.ts",
           "target": "${utils}/formatters/formatters.ts"
+        },
+        {
+          "source": "src/items/utils/formatters/index.ts",
+          "target": "${utils}/formatters/index.ts"
         }
       ]
     },
@@ -72,6 +96,10 @@
         {
           "source": "src/items/utils/pagination-params/pagination-params.ts",
           "target": "${utils}/pagination-params/pagination-params.ts"
+        },
+        {
+          "source": "src/items/utils/pagination-params/index.ts",
+          "target": "${utils}/pagination-params/index.ts"
         }
       ]
     },
@@ -83,6 +111,10 @@
         {
           "source": "src/items/utils/pagination-meta/pagination-meta.ts",
           "target": "${utils}/pagination-meta/pagination-meta.ts"
+        },
+        {
+          "source": "src/items/utils/pagination-meta/index.ts",
+          "target": "${utils}/pagination-meta/index.ts"
         }
       ]
     },
@@ -97,6 +129,10 @@
         {
           "source": "src/items/errors/http-errors/http-errors.ts",
           "target": "${errors}/http-errors/http-errors.ts"
+        },
+        {
+          "source": "src/items/errors/http-errors/index.ts",
+          "target": "${errors}/http-errors/index.ts"
         }
       ]
     },
@@ -107,6 +143,10 @@
         {
           "source": "src/items/utils/regex-patterns/regex-patterns.ts",
           "target": "${validation}/regex-patterns.ts"
+        },
+        {
+          "source": "src/items/utils/regex-patterns/index.ts",
+          "target": "${validation}/regex-patterns/index.ts"
         }
       ]
     },
@@ -117,6 +157,10 @@
         {
           "source": "src/items/schemas/common-schemas/common-schemas.ts",
           "target": "${validation}/common-schemas.ts"
+        },
+        {
+          "source": "src/items/schemas/common-schemas/index.ts",
+          "target": "${validation}/common-schemas/index.ts"
         }
       ],
       "itemDependencies": ["shared-constants"],
@@ -167,7 +211,7 @@
           "target": "${types}/api.ts"
         }
       ],
-      "dependencies": ["axios", "react-native-uuid", "react-native-get-random-values"]
+      "dependencies": ["axios"]
     },
     {
       "name": "client-logger",
@@ -176,6 +220,10 @@
         {
           "source": "src/items/utils/client-logger/client-logger.ts",
           "target": "${logger}/client-logger.ts"
+        },
+        {
+          "source": "src/items/utils/client-logger/index.ts",
+          "target": "${logger}/client-logger/index.ts"
         }
       ],
       "dependencies": ["axios"]
@@ -191,7 +239,7 @@
         },
         {
           "source": "src/items/utils/rpc-client/rpc-client.ts",
-          "target": "${utils}/rpc-client/index.ts"
+          "target": "${utils}/rpc-client/rpc-client.ts"
         }
       ]
     },
@@ -202,6 +250,10 @@
         {
           "source": "src/items/utils/format-zod-issues/format-zod-issues.ts",
           "target": "${utils}/format-zod-issues/format-zod-issues.ts"
+        },
+        {
+          "source": "src/items/utils/format-zod-issues/index.ts",
+          "target": "${utils}/format-zod-issues/index.ts"
         }
       ],
       "dependencies": ["zod"]
@@ -217,6 +269,10 @@
         {
           "source": "src/items/utils/with-validation/handle-api-errors.ts",
           "target": "${api}/handle-api-errors.ts"
+        },
+        {
+          "source": "src/items/utils/with-validation/index.ts",
+          "target": "${api}/with-validation/index.ts"
         }
       ],
       "dependencies": ["next", "zod"]
@@ -232,6 +288,10 @@
         {
           "source": "src/items/utils/next-middleware/with-trace-id.ts",
           "target": "${middleware}/with-trace-id.ts"
+        },
+        {
+          "source": "src/items/utils/next-middleware/index.ts",
+          "target": "${middleware}/next-middleware/index.ts"
         }
       ],
       "dependencies": ["next"]
@@ -243,6 +303,10 @@
         {
           "source": "src/items/errors/normalize-error/normalize-error.ts",
           "target": "${errors}/normalize-error/normalize-error.ts"
+        },
+        {
+          "source": "src/items/errors/normalize-error/index.ts",
+          "target": "${errors}/normalize-error/index.ts"
         }
       ],
       "itemDependencies": ["http-errors"],
@@ -296,6 +360,10 @@
         {
           "source": "src/items/lib/supabase/client.ts",
           "target": "${lib}/supabase.ts"
+        },
+        {
+          "source": "src/items/lib/supabase/index.ts",
+          "target": "${lib}/supabase/index.ts"
         }
       ],
       "dependencies": ["@supabase/supabase-js"]
