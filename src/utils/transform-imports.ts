@@ -11,6 +11,11 @@
  * - Dynamic imports:   `import('@errors/api-error')`
  * - Type-only imports: `import type { X } from '@errors/api-error'`
  *
+ * Also handles internal source prefixes that don't match consumer path keys:
+ * - `@items/errors/http-errors`  → strips `items/`  → matches `errors` path key
+ * - `@src/items/errors`          → strips `src/items/` → matches `errors` path key
+ * - `@src/shared/constants`      → strips `src/`    → no path key match → preserved for consumer tsconfig alias
+ *
  * Relative imports (`./foo`, `../bar`) are left untouched.
  */
 
@@ -19,11 +24,11 @@ import type { ConsumerConfig } from '../types/index';
 /**
  * Transforms registry alias imports in `content` using the consumer config.
  *
- * For each import specifier that matches `@<pathKey>/<rest>`, the path key
- * is looked up in `config.paths`, the leading `src/` is stripped if present,
- * and the consumer's `config.alias` is prepended.
- *
- * Non-matching and relative imports are preserved as-is.
+ * For each import specifier that matches `@<specifier>`, internal source
+ * prefixes (`src/`, `items/`) are stripped and the result is checked
+ * against the consumer's path keys. If matched, the consumer's path prefix
+ * and alias are used. Non-matching specifiers are preserved as-is (the
+ * consumer's tsconfig aliases handle them).
  *
  * @param content - The raw source text of a registry template file.
  * @param config  - Consumer config (paths map + alias prefix).
@@ -45,19 +50,20 @@ export function transformImports(content: string, config: ConsumerConfig): strin
     return content;
   }
 
-  const keysPattern = pathKeys.map((k) => escapeRegex(k)).join('|');
-  const specifierPattern = new RegExp(`(['"])@(${keysPattern})/([^'"]+)\\1`, 'g');
+  const specifierPattern = /(['"])@([^'"]+)\1/g;
 
-  return content.replace(specifierPattern, (_match, quote, key, rest) => {
-    const prefix = config.paths[key];
-    const consumerPath = prefix.replace(/^src\//, '');
-    return `${quote}${config.alias}/${consumerPath}/${rest}${quote}`;
+  return content.replace(specifierPattern, (_match, quote, specifier) => {
+    const cleaned = specifier.replace(/^(src\/)?(items\/)?/, '');
+
+    for (const key of pathKeys) {
+      if (cleaned === key || cleaned.startsWith(key + '/')) {
+        const rest = cleaned.slice(key.length + 1);
+        const prefix = config.paths[key].replace(/^src\//, '');
+        const consumerPath = rest ? `${prefix}/${rest}` : prefix;
+        return `${quote}${config.alias}/${consumerPath}${quote}`;
+      }
+    }
+
+    return `${quote}@${cleaned}${quote}`;
   });
-}
-
-/**
- * Escapes special regex characters in a string.
- */
-function escapeRegex(str: string): string {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }

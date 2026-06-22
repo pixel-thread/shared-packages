@@ -341,6 +341,10 @@
           "target": "${utils}/errors/http-errors.ts"
         },
         {
+          "source": "src/items/errors/http-errors/base.ts",
+          "target": "${utils}/errors/base.ts"
+        },
+        {
           "source": "src/items/errors/http-errors/index.ts",
           "target": "${utils}/errors/index.ts"
         }

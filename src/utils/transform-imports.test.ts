@@ -152,4 +152,64 @@ describe('transformImports', () => {
     const expected = `import { format } from '@/shared/utils/format-zod-issues';`;
     expect(transformImports(input, config)).toBe(expected);
   });
+
+  describe('internal prefix handling', () => {
+    it('strips @items/ prefix to match path key', () => {
+      const input = `import { InvalidJsonError } from '@items/errors/http-errors';`;
+      const expected = `import { InvalidJsonError } from '@/shared/errors/http-errors';`;
+      expect(transformImports(input, sampleConfig)).toBe(expected);
+    });
+
+    it('strips @src/items/ prefix to match path key (barrel import)', () => {
+      const input = `import { normalizeUnknownError } from '@src/items/errors';`;
+      const expected = `import { normalizeUnknownError } from '@/shared/errors';`;
+      expect(transformImports(input, sampleConfig)).toBe(expected);
+    });
+
+    it('strips @src/ prefix to match path key', () => {
+      const input = `import { PAGE_SIZE } from '@src/shared/constants';`;
+      const expected = `import { PAGE_SIZE } from '@/shared/constants';`;
+      expect(transformImports(input, sampleConfig)).toBe(expected);
+    });
+
+    it('falls through when path key is not in config (consumer alias handles it)', () => {
+      const config: ConsumerConfig = {
+        alias: '@',
+        aliases: {},
+        paths: {
+          errors: 'src/shared/errors',
+          utils: 'src/shared/utils',
+        },
+      };
+      const input = `import { PAGE_SIZE } from '@src/shared/constants';`;
+      const expected = `import { PAGE_SIZE } from '@shared/constants';`;
+      expect(transformImports(input, config)).toBe(expected);
+    });
+
+    it('handles @items/utils/ prefix', () => {
+      const config: ConsumerConfig = {
+        alias: '@',
+        aliases: {},
+        paths: {
+          utils: 'src/shared/utils',
+        },
+      };
+      const input = `import { formatZodIssues } from '@items/utils/format-zod-issues';`;
+      const expected = `import { formatZodIssues } from '@/shared/utils/format-zod-issues';`;
+      expect(transformImports(input, config)).toBe(expected);
+    });
+
+    it('handles @utils/ without internal prefix (direct match)', () => {
+      const config: ConsumerConfig = {
+        alias: '@',
+        aliases: {},
+        paths: {
+          utils: 'src/shared/utils',
+        },
+      };
+      const input = `import { format } from '@utils/format-zod-issues';`;
+      const expected = `import { format } from '@/shared/utils/format-zod-issues';`;
+      expect(transformImports(input, config)).toBe(expected);
+    });
+  });
 });
