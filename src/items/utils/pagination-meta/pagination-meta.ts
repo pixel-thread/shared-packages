@@ -5,7 +5,7 @@
  * and current page, using an optional or default page size.
  */
 
-import { PAGE_SIZE } from '@src/shared/constants/constants';
+import { PAGE_SIZE } from '@items/utils/constants/common';
 import type { PaginationMeta } from '@src/shared/types/types';
 
 /**

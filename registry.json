@@ -520,8 +520,8 @@
       "description": "Project-wide shared constants including pagination, file size limits, and allowed file format/MIME type lists.",
       "files": [
         {
-          "source": "src/items/shared/constants/constants.ts",
-          "target": "${utils}/constants/constants.ts"
+          "source": "src/items/utils/constants/common.ts",
+          "target": "${utils}/constants/common.ts"
         }
       ],
       "dependencies": []

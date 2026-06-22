@@ -5,7 +5,7 @@
  * based on the current page and the project-wide `PAGE_SIZE` constant.
  */
 
-import { PAGE_SIZE } from '@src/shared/constants/constants';
+import { PAGE_SIZE } from '@items/utils/constants/common';
 
 /** Parameters for a paginated database query. */
 export interface PaginationParams {
