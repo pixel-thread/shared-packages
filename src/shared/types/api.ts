@@ -1,13 +1,25 @@
-/**
- * @file Stub — re-exports HTTP client types from the registry item source.
- * This file exists so `@shared/types/api` resolves in-editor during development.
- * Consumers get the real file when they `shared-packages add http-client`.
- */
+export type MetaT = Record<string, unknown>;
 
-export type {
-  MetaT,
-  ApiResponse,
-  HttpMethod,
-  HeadersMap,
-  InternalResponse,
-} from '../../items/utils/http-client/types';
+export interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T | null;
+  error: string | Record<string, unknown>;
+  meta?: MetaT;
+}
+
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+export type HeadersMap = Record<string, string>;
+
+export interface InternalResponse<T> {
+  data: T;
+  status: number;
+  statusText: string;
+  headers: HeadersMap;
+}
+
+export interface QueueItem {
+  resolve: (token: string) => void;
+  reject: (error: unknown) => void;
+}

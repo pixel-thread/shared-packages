@@ -124,22 +124,46 @@
     },
     {
       "name": "http-client",
-      "description": "Axios HTTP client wrapper with typed responses and cancel support.",
+      "description": "Axios HTTP client wrapper with typed responses, interceptors, and token refresh support.",
       "files": [
+        {
+          "source": "src/items/utils/http-client/constants.ts",
+          "target": "${api}/constants.ts"
+        },
+        {
+          "source": "src/items/utils/http-client/client.ts",
+          "target": "${api}/client.ts"
+        },
         {
           "source": "src/items/utils/http-client/http.ts",
           "target": "${api}/http.ts"
         },
         {
-          "source": "src/items/utils/http-client/types.ts",
-          "target": "${types}/api.ts"
+          "source": "src/items/utils/http-client/request-interceptor.ts",
+          "target": "${api}/request-interceptor.ts"
         },
         {
           "source": "src/items/utils/http-client/response.ts",
           "target": "${api}/response.ts"
+        },
+        {
+          "source": "src/items/utils/http-client/response-interceptor.ts",
+          "target": "${api}/response-interceptor.ts"
+        },
+        {
+          "source": "src/items/utils/http-client/session-expired-handler.ts",
+          "target": "${api}/session-expired-handler.ts"
+        },
+        {
+          "source": "src/items/utils/http-client/token-refresher.ts",
+          "target": "${api}/token-refresher.ts"
+        },
+        {
+          "source": "src/shared/types/api.ts",
+          "target": "${types}/api.ts"
         }
       ],
-      "dependencies": ["axios"]
+      "dependencies": ["axios", "react-native-uuid", "react-native-get-random-values"]
     },
     {
       "name": "client-logger",

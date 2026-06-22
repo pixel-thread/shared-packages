@@ -2,13 +2,13 @@
  * @file Axios HTTP client wrapper with typed responses and request cancellation support.
  *
  * Provides a thin wrapper around `axios` with standardised error handling
- * and typed response shapes. Each method logs cancelled requests via the
- * client logger and returns a consistent {@link ApiResponse} shape.
+ * and typed response shapes. Each method returns a consistent {@link ApiResponse} shape.
  */
 
-import axios, { AxiosRequestConfig,  } from "axios";
+import  { AxiosRequestConfig } from "axios";
 import { ApiResponse } from "@shared/types/api";
 import { handleResponse, handleAxiosError } from "./response";
+import apiClient from "./client";
 
 /**
  * Typed HTTP client with `get`, `post`, `put`, and `delete` methods.
@@ -39,7 +39,7 @@ export const http = {
     config?: AxiosRequestConfig,
   ): Promise<ApiResponse<T>> => {
     try {
-      const response = await axios.get(url, config);
+      const response = await  apiClient.get(url, config);
       return handleResponse<T>(response);
     } catch (error) {
       return handleAxiosError<T>(error);
@@ -60,7 +60,7 @@ export const http = {
     config?: AxiosRequestConfig,
   ): Promise<ApiResponse<T>> => {
     try {
-      const response = await axios.post(url, data, config);
+      const response = await  apiClient.post(url, data, config);
       return handleResponse<T>(response);
     } catch (error) {
       return handleAxiosError<T>(error);
@@ -81,7 +81,7 @@ export const http = {
     config?: AxiosRequestConfig,
   ): Promise<ApiResponse<T>> => {
     try {
-      const response = await axios.put(url, data, config);
+      const response = await apiClient.put(url, data, config);
       return handleResponse<T>(response);
     } catch (error) {
       return handleAxiosError<T>(error);
@@ -100,7 +100,7 @@ export const http = {
     config?: AxiosRequestConfig,
   ): Promise<ApiResponse<T>> => {
     try {
-      const response = await axios.delete(url, config);
+      const response = await apiClient.delete(url, config);
       return handleResponse<T>(response);
     } catch (error) {
       return handleAxiosError<T>(error);
