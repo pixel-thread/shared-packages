@@ -6,7 +6,7 @@
  * related operations behind a single endpoint.
  */
 
-import type { ApiResponse } from '../types/api';
+import type { ApiResponse } from '@shared/types/api';
 import { http } from './http';
 
 /** A generic RPC request payload. */

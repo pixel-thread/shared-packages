@@ -6,10 +6,9 @@
  * client logger and returns a consistent {@link ApiResponse} shape.
  */
 
-import axios, { AxiosRequestConfig, isCancel } from "axios";
+import axios, { AxiosRequestConfig,  } from "axios";
+import { ApiResponse } from "@shared/types/api";
 import { handleResponse, handleAxiosError } from "./response";
-import {logger} from "@items/utils/client-logger"
-import {ApiResponse} from "@items/shared/types"
 
 /**
  * Typed HTTP client with `get`, `post`, `put`, and `delete` methods.
@@ -43,9 +42,6 @@ export const http = {
       const response = await axios.get(url, config);
       return handleResponse<T>(response);
     } catch (error) {
-      if (isCancel(error)) {
-        logger.warn(`GET ${url} Request to ${url} was cancelled.`);
-      }
       return handleAxiosError<T>(error);
     }
   },

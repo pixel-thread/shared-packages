@@ -28,13 +28,15 @@ export type RegistryFile = {
  *
  * Each item declares one or more source files, their destination paths,
  * and optional npm dependencies that must be installed for the code to work.
+ * When targets use the `${pathKey}/filename.ext` syntax, the CLI resolves
+ * the path prefix from the consumer's `pixelthread.json`.
  *
  * @example
  * ```ts
  * const item: RegistryItem = {
  *   name: "user-schema",
  *   description: "Zod schema and types for creating a user.",
- *   files: [{ source: "src/items/user-schema/user.schema.ts", target: "src/shared/validation/user.schema.ts" }],
+ *   files: [{ source: "src/items/user-schema/user.schema.ts", target: "validation/user.schema.ts" }],
  *   dependencies: ["zod"],
  * };
  * ```
@@ -71,4 +73,32 @@ export type Registry = {
   version: string;
   /** All distributable items. */
   items: RegistryItem[];
+};
+
+/**
+ * Consumer-side configuration file (`pixelthread.json`).
+ *
+ * Defines path mappings and import aliases that the CLI uses to resolve
+ * item target paths. Modelled after shadcn's `components.json`.
+ *
+ * @example
+ * ```json
+ * {
+ *   "aliases": { "@shared/*": ["src/shared/*"] },
+ *   "paths": { "api": "src/shared/api" }
+ * }
+ * ```
+ */
+export type ConsumerConfig = {
+  /** Import aliases the consumer should add to their tsconfig paths. */
+  aliases: Record<string, string[]>;
+  /** File path prefixes resolved by the CLI for `${pathKey}` targets. */
+  paths: Record<string, string>;
+  /**
+   * Prefix used when rewriting registry alias imports.
+   *
+   * E.g. `"@"` produces `@/shared/errors/api-error` from
+   * a registry import `@errors/api-error`.
+   */
+  alias: string;
 };
