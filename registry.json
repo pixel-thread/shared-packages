@@ -89,6 +89,16 @@
       "devDependencies": ["@types/pg"]
     },
     {
+      "name": "hash",
+      "description": "Cryptographically secure token generation and SHA-256 hashing utilities.",
+      "files": [
+        {
+          "source": "src/items/lib/hash/hash.ts",
+          "target": "src/shared/libs/hash/index.ts"
+        }
+      ]
+    },
+    {
       "name": "user-schema",
       "description": "Zod schema and types for creating a user.",
       "files": [
