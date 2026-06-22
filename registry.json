@@ -7,7 +7,7 @@
       "description": "Zod schema and types for creating a user.",
       "files": [
         {
-          "source": "src/items/user-schema/user.schema.ts",
+          "source": "src/items/schemas/user-schema/user.schema.ts",
           "target": "src/shared/validation/user.schema.ts"
         }
       ],
@@ -18,7 +18,7 @@
       "description": "Reusable HTTP API error class.",
       "files": [
         {
-          "source": "src/items/api-error/api-error.ts",
+          "source": "src/items/errors/api-error/api-error.ts",
           "target": "src/shared/errors/api-error.ts"
         }
       ]
@@ -28,8 +28,119 @@
       "description": "Pagination parsing and response helpers.",
       "files": [
         {
-          "source": "src/items/pagination/pagination.ts",
+          "source": "src/items/utils/pagination/pagination.ts",
           "target": "src/shared/pagination/pagination.ts"
+        }
+      ]
+    },
+    {
+      "name": "url-utils",
+      "description": "URL building utilities with query parameter support.",
+      "files": [
+        {
+          "source": "src/items/utils/url-utils/url-utils.ts",
+          "target": "src/shared/utils/url-utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "async-handler",
+      "description": "Async Express route handler wrapper for error forwarding.",
+      "files": [
+        {
+          "source": "src/items/utils/async-handler/async-handler.ts",
+          "target": "src/shared/middleware/async-handler.ts"
+        }
+      ],
+      "dependencies": ["express"]
+    },
+    {
+      "name": "formatters",
+      "description": "Formatting utilities for currency, dates, slugs, and order IDs.",
+      "files": [
+        {
+          "source": "src/items/utils/formatters/formatters.ts",
+          "target": "src/shared/utils/formatters.ts"
+        }
+      ]
+    },
+    {
+      "name": "pagination-params",
+      "description": "Pagination parameter builder using a shared PAGE_SIZE constant.",
+      "files": [
+        {
+          "source": "src/items/utils/pagination-params/pagination-params.ts",
+          "target": "src/shared/utils/pagination-params.ts"
+        }
+      ]
+    },
+    {
+      "name": "pagination-meta",
+      "description": "Pagination metadata builder (total, pages, hasMore).",
+      "files": [
+        {
+          "source": "src/items/utils/pagination-meta/pagination-meta.ts",
+          "target": "src/shared/utils/pagination-meta.ts"
+        }
+      ]
+    },
+    {
+      "name": "http-errors",
+      "description": "HTTP error classes extending AppError (400, 401, 403, 404, 409, 422, 429, etc.).",
+      "files": [
+        {
+          "source": "src/items/errors/http-errors/http-errors.ts",
+          "target": "src/shared/errors/http-errors.ts"
+        }
+      ]
+    },
+    {
+      "name": "regex-patterns",
+      "description": "Positive and negative regex patterns for Zod validation.",
+      "files": [
+        {
+          "source": "src/items/schemas/regex-patterns/regex-patterns.ts",
+          "target": "src/shared/validation/regex-patterns.ts"
+        }
+      ]
+    },
+    {
+      "name": "http-client",
+      "description": "Axios HTTP client wrapper with typed responses and cancel support.",
+      "files": [
+        {
+          "source": "src/items/utils/http-client/http.ts",
+          "target": "src/shared/api/http.ts"
+        },
+        {
+          "source": "src/items/utils/http-client/types.ts",
+          "target": "src/shared/types/api.ts"
+        },
+        {
+          "source": "src/items/utils/http-client/response.ts",
+          "target": "src/shared/api/response.ts"
+        }
+      ],
+      "dependencies": ["axios"]
+    },
+    {
+      "name": "client-logger",
+      "description": "Client-side logger that logs to console in dev and sends to server in production.",
+      "files": [
+        {
+          "source": "src/items/utils/client-logger/client-logger.ts",
+          "target": "src/shared/logger/client-logger.ts"
+        }
+      ],
+      "dependencies": ["axios"]
+    },
+    {
+      "name": "rpc-client",
+      "description": "RPC client using HTTP POST to /rpc endpoint.",
+      "files": [
+        {
+          "source": "src/items/utils/rpc-client/rpc-client.ts",
+          "target": "src/shared/api/rpc-client.ts"
         }
       ]
     }

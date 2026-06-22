@@ -18,9 +18,9 @@ import fs from "fs-extra";
 import path from "node:path";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { getPackageRoot } from "../registry/index.js";
-import type { RegistryItem } from "../types/index.js";
-import { detectPackageManager } from "../utils/index.js";
+import { getPackageRoot } from "../registry/index";
+import type { RegistryItem } from "../types/index";
+import { detectPackageManager } from "../utils/index";
 
 const execFileAsync = promisify(execFile);
 

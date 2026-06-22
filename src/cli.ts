@@ -16,9 +16,8 @@
  */
 
 import { Command } from "commander";
-import { loadRegistry } from "./registry/index.js";
-import { listItems } from "./commands/list.js";
-import { addItem } from "./commands/add.js";
+import { loadRegistry } from "./registry/index";
+import { listItems, addItem } from "./commands/index";
 
 /** Create the root CLI program and register all commands. */
 const program = new Command();
