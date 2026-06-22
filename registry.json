@@ -101,6 +101,7 @@
     {
       "name": "encryption",
       "description": "AES-256-GCM field-level encryption and decryption utilities.",
+      "dependencies": ["http-errors"],
       "files": [
         {
           "source": "src/items/lib/encryption/encryption.ts",
