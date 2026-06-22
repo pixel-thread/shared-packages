@@ -1,7 +1,7 @@
 /**
  * @file Registry loader and item lookup.
  *
- * Responsible for reading and parsing `registryon` from the package root,
+ * Responsible for reading and parsing `registry.json` from the package root,
  * resolving paths correctly in both development (`tsx`) and production (compiled JS).
  */
 
@@ -28,17 +28,17 @@ import type { Registry, RegistryItem } from '../types/index';
 export function getPackageRoot(): string {
   const currentFilePath = fileURLToPath(import.meta.url);
   const currentDirectory = path.dirname(currentFilePath);
-  return path.resolve(currentDirectory, '..', '..');
+  return path.resolve(currentDirectory, '..');
 }
 
 /**
- * Loads and parses the registryon file from the package root.
+ * Loads and parses the registry.json file from the package root.
  *
  * Reads the file synchronously at startup so the CLI is ready immediately.
  * The registry object is treated as the source of truth for all available items.
  *
  * @returns The parsed Registry object.
- * @throws If registryon is missing or malformed.
+ * @throws If registry.json is missing or malformed.
  *
  * @example
  * ```ts
@@ -48,7 +48,7 @@ export function getPackageRoot(): string {
  */
 export function loadRegistry(): Registry {
   const packageRoot = getPackageRoot();
-  const registryPath = path.join(packageRoot, 'registryon');
+  const registryPath = path.join(packageRoot, 'registry.json');
   return fs.readJsonSync(registryPath) as Registry;
 }
 
