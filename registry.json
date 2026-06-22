@@ -382,6 +382,19 @@
       "devDependencies": ["@types/express"]
     },
     {
+      "name": "rbac",
+      "description": "Express RBAC middleware that checks user roles against allowed roles.",
+      "files": [
+        {
+          "source": "src/items/middleware/rbac/rbac.ts",
+          "target": "${middleware}/rbac/rbac.ts"
+        }
+      ],
+      "itemDependencies": ["http-errors", "async-handler"],
+      "dependencies": ["express"],
+      "devDependencies": ["@types/express", "@prisma/client"]
+    },
+    {
       "name": "express-error-handler",
       "description": "Express error handling middleware that normalizes errors into a consistent JSON response.",
       "files": [
