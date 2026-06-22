@@ -13,6 +13,50 @@
       ]
     },
     {
+      "name": "eslint-express",
+      "description": "ESLint flat config for Express/Node.js backend projects.",
+      "files": [
+        {
+          "source": "src/items/eslint/express.mjs",
+          "target": "eslint.config.mjs"
+        }
+      ],
+      "devDependencies": ["@eslint/js", "eslint-plugin-simple-import-sort", "globals", "typescript-eslint"]
+    },
+    {
+      "name": "eslint-next",
+      "description": "ESLint flat config for Next.js projects with React Hooks and simple-import-sort.",
+      "files": [
+        {
+          "source": "src/items/eslint/next.mjs",
+          "target": "eslint.config.mjs"
+        }
+      ],
+      "devDependencies": ["@next/eslint-plugin-next", "eslint-plugin-react-hooks", "eslint-plugin-simple-import-sort", "typescript-eslint"]
+    },
+    {
+      "name": "eslint-react-native",
+      "description": "ESLint flat config for Expo / React Native projects.",
+      "files": [
+        {
+          "source": "src/items/eslint/react-native.cjs",
+          "target": "eslint.config.cjs"
+        }
+      ],
+      "devDependencies": ["eslint-config-expo", "eslint-plugin-unused-imports"]
+    },
+    {
+      "name": "eslint-react",
+      "description": "ESLint flat config for React (web) projects with TanStack Query/Router.",
+      "files": [
+        {
+          "source": "src/items/eslint/react.mjs",
+          "target": "eslint.config.mjs"
+        }
+      ],
+      "devDependencies": ["@tanstack/eslint-plugin-query", "@tanstack/eslint-plugin-router", "eslint-plugin-react-hooks", "eslint-plugin-simple-import-sort", "typescript-eslint"]
+    },
+    {
       "name": "user-schema",
       "description": "Zod schema and types for creating a user.",
       "files": [
