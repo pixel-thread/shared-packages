@@ -184,6 +184,28 @@
         }
       ],
       "dependencies": ["next"]
+    },
+    {
+      "name": "prisma-client",
+      "description": "Prisma client singleton with PostgreSQL adapter and connection pooling.",
+      "files": [
+        {
+          "source": "src/items/lib/prisma-client/prisma-client.ts",
+          "target": "src/shared/lib/prisma.ts"
+        }
+      ],
+      "dependencies": ["@prisma/client", "@prisma/adapter-pg", "pg"]
+    },
+    {
+      "name": "normalize-error",
+      "description": "Convert unknown errors into typed AppError instances. Handles JWT, Zod, Supabase, and generic errors.",
+      "files": [
+        {
+          "source": "src/items/errors/normalize-error/normalize-error.ts",
+          "target": "src/shared/errors/normalize-error.ts"
+        }
+      ],
+      "dependencies": ["jose", "zod"]
     }
   ]
 }
