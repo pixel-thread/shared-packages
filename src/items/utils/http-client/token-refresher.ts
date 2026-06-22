@@ -7,7 +7,7 @@
  */
 
 import { API_BASE_URL } from './constants';
-import type { QueueItem } from '@shared/types';
+import type { QueueItem } from '@shared/types/api';
 import apiClient from './client';
 
 /** Flag indicating if a token refresh request is currently in flight. */
