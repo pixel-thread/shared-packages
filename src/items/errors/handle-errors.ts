@@ -7,7 +7,7 @@ type RouteHandler<T> = (
   context: T,
 ) => Promise<Response>;
 
-export function handleApiErrors<T>(handler: RouteHandler<T>) {
+export function handleErrors<T>(handler: RouteHandler<T>) {
   return async (request: NextRequest, context: T): Promise<Response> => {
     try {
       return await handler(request, context);
