@@ -37,11 +37,11 @@
       "files": [
         {
           "source": "src/items/utils/pagination/pagination.ts",
-          "target": "${pagination}/pagination.ts"
+          "target": "${utils}/pagination/index.ts"
         },
         {
           "source": "src/items/utils/pagination/index.ts",
-          "target": "${pagination}/index.ts"
+          "target": "${utils}/index.ts"
         }
       ]
     },
@@ -219,11 +219,11 @@
       "files": [
         {
           "source": "src/items/utils/client-logger/client-logger.ts",
-          "target": "${logger}/client-logger.ts"
+          "target": "${utils}/client-logger.ts"
         },
         {
           "source": "src/items/utils/client-logger/index.ts",
-          "target": "${logger}/client-logger/index.ts"
+          "target": "${utils}/client-logger/index.ts"
         }
       ],
       "dependencies": ["axios"]
@@ -318,15 +318,15 @@
       "files": [
         {
           "source": "src/items/services/storage-provider/types.ts",
-          "target": "${services-storage}/types.ts"
+          "target": "${services}/types.ts"
         },
         {
           "source": "src/items/services/storage-provider/get-storage-provider.ts",
-          "target": "${services-storage}/get-storage-provider.ts"
+          "target": "${services}/get-storage-provider.ts"
         },
         {
           "source": "src/items/services/storage-provider/index.ts",
-          "target": "${services-storage}/index.ts"
+          "target": "${services}/index.ts"
         }
       ],
       "dependencies": []
@@ -374,7 +374,7 @@
       "files": [
         {
           "source": "src/items/shared/constants/index.ts",
-          "target": "${constants}/index.ts"
+          "target": "${utils}/constants/index.ts"
         }
       ],
       "dependencies": []

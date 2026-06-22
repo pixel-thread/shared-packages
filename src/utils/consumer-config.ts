@@ -29,10 +29,7 @@ export const DEFAULT_CONSUMER_CONFIG: ConsumerConfig = {
     utils: 'src/shared/utils',
     middleware: 'src/shared/middleware',
     validation: 'src/shared/validation',
-    pagination: 'src/shared/pagination',
-    logger: 'src/shared/logger',
-    'services-storage': 'src/shared/services/storage',
-    constants: 'src/shared/constants',
+    services: 'src/shared/services/storage',
   },
 };
 
