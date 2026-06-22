@@ -11,19 +11,16 @@
 3. [SOLID Architecture Rules](#solid-architecture-rules)
 4. [Naming Conventions](#naming-conventions)
 5. [Architecture Overview](#architecture-overview)
-6. [Feature Module Structure](#feature-module-structure)
+6. [Item Structure](#item-structure)
 7. [Shared Directory Structure](#shared-directory-structure)
-8. [Route Definitions](#route-definitions)
-9. [Middleware Pipeline](#middleware-pipeline)
-10. [Data Flow](#data-flow)
-11. [Service Rules](#service-rules)
-12. [Validation Rules](#validation-rules)
-13. [API Rules](#api-rules)
-14. [Prisma / Database Rules](#prisma--database-rules)
-15. [Import Rules](#import-rules)
-16. [Documentation & JSDoc Rules](#documentation--jsdoc-rules)
-17. [AI Agent Checklist](#ai-agent-checklist)
-18. [Barrel Export Rules](#barrel-export-rules)
+8. [CLI Commands](#cli-commands)
+9. [Registry Loading](#registry-loading)
+10. [Command Rules](#command-rules)
+11. [Validation Rules](#validation-rules)
+12. [API Rules](#api-rules)
+13. [Import Rules](#import-rules)
+14. [Documentation & JSDoc Rules](#documentation--jsdoc-rules)
+15. [AI Agent Checklist](#ai-agent-checklist)
 
 ---
 
@@ -47,46 +44,13 @@ These three principles override everything else. When in doubt, come back to the
 
 - Never hardcode secrets, API keys, tokens, or credentials anywhere in source files.
 - Never log sensitive data: passwords, tokens, PII, card numbers, session IDs.
-- All environment variables must be declared and validated in `src/env.ts` using `t3-env`. Unknown variables must cause a startup failure.
-- Any new environment variable must be added to `src/env.ts` before it is used anywhere.
+- Secrets live in environment variables or a secrets manager — never in source code or agent context.
 
-### Backend Security
+### Error Handling
 
-**Input Validation**
-
-- Every API route must validate its input (body, query, params) with a Zod schema via `validate()` middleware before any business logic runs.
-- Never trust client-supplied data. Validate shape, type, range, and allowlist values.
-- Reject unknown fields — use Zod `.strict()` on all schemas unless explicitly justified.
-
-**Authentication & Authorization**
-
-- Every non-public route must be protected by the `auth` middleware.
-- Use `withRole(req, minRole)` utility inside handlers to enforce granular authorization.
-- Never derive authorization from client-sent headers alone. Always verify from the session/JWT.
-
-**Data Access**
-
-- Always scope database queries to the authenticated user's association. Never return cross-tenant data.
-- Prefer allowlists over denylists for field selection in Prisma queries.
-- Never expose raw Prisma error messages to the client.
-- Use parameterized queries only. Never construct raw SQL strings.
-
-**HTTP Security**
-
-- All responses must pass through `securityHeaders` middleware (CSP, HSTS, X-Content-Type-Options, X-Frame-Options).
-- CORS policy is enforced by `cors` middleware — never override it inside a route.
-- Rate limiting is enforced by `rateLimiter` — never bypass it.
-
-**Error Handling**
-
-- Never expose stack traces or internal error details to the client.
-- Use `success()` and `error()` response helpers exclusively.
-- Log full errors server-side via `logger`; send minimal sanitized messages to the client.
-
-**Secrets & Tokens**
-
-- JWTs are validated server-side on every request. Never trust a client-decoded token.
-- Session tokens must be `httpOnly`, `secure`, `sameSite=strict` cookies (where applicable).
+- Never expose stack traces or internal error details to the consumer.
+- CLI commands must exit with a non-zero code on failure.
+- Validate source files exist before copying them.
 
 ---
 
@@ -166,141 +130,139 @@ Export: export const CreateModuleSchema = z.object({...})
 
 ## Architecture Overview
 
-**Framework:** Express 5 · TypeScript strict · Prisma ORM · Supabase · Redis (Upstash) · Zod
+**Stack:** TypeScript strict · Commander · tsup bundler · fs-extra · @clack/prompts · Zod
 
 ```
 src/
-├── features/     ← Feature modules (domain logic)
-├── middleware/   ← Global Express middlewares
-├── shared/       ← Cross-cutting infrastructure
-├── env.ts        ← Environment variable validation (t3-env)
-└── index.ts      ← Express App Entry Point & Route Registration
+├── cli.ts        ← CLI entry point (Commander program)
+├── commands/     ← Command implementations (list, add)
+├── items/        ← Distributable source files (categorised)
+│   ├── errors/
+│   ├── schemas/
+│   └── utils/
+├── registry/     ← Registry loading & path resolution
+├── types/        ← Shared TypeScript types
+├── utils/        ← Internal utility helpers
+└── shared/       ← Stubs for alias resolution in items
 ```
 
 ### Path Aliases
 
-| Alias           | Resolves to                 |
-| --------------- | --------------------------- |
-| `@src/*`        | `./src/*`                   |
-| `@feature/*`    | `./src/features/*`          |
-| `@middleware/*` | `./src/middleware/*`        |
-| `@utils/*`      | `./src/shared/utils/*`      |
-| `@lib/*`        | `./src/shared/lib/*`        |
-| `@validator/*`  | `./src/shared/validators/*` |
-| `@sharedType/*` | `./src/shared/types/*`      |
-| `@errors/*`     | `./src/shared/errors/*`     |
+| Alias           | Resolves to          |
+| --------------- | -------------------- |
+| `@src/*`        | `./src/*`            |
+| `@sharedTypes/*`| `./src/shared/types/*`|
+| `@utils/*`      | `./src/utils/*`      |
+| `@items/*`      | `./src/items/*`      |
 
 ---
 
-## Feature Module Structure
+## Item Structure
 
-Every feature lives in `src/features/<feature-name>/` using `kebab-case`.
+Every distributable item lives in `src/items/<category>/<item-name>/` using `kebab-case`.
 
 ```
-src/features/<feature-name>/
-├── routes/          ← Express route handlers (exported via index.ts)
-├── services/        ← Server-side business logic
-├── types/           ← Feature-specific TypeScript types
-├── validators/      ← Zod schemas
-└── utils/           ← Feature-specific utilities
+src/items/<category>/<item-name>/
+├── <item-name>.ts   ← Main source file
+└── index.ts         ← Barrel re-export
 ```
+
+### Item Categories
+
+| Directory   | Contents                              |
+| ----------- | ------------------------------------- |
+| `errors/`   | Error classes and error utilities     |
+| `schemas/`  | Zod schemas and validation patterns   |
+| `utils/`    | General-purpose utilities and clients |
 
 ---
 
 ## Shared Directory Structure
 
-`src/shared/` contains infrastructure used across features.
+`src/shared/` contains stub files that exist only for alias resolution so item source files compile in-editor. They are **not** published — actual consumers get the files via `shared-packages add`.
 
-| Subdirectory | Contents                                           |
-| ------------ | -------------------------------------------------- |
-| `constants/` | Route constants, roles, regex                      |
-| `errors/`    | Error classes (`UnauthorizedError`, etc.)          |
-| `lib/`       | Infrastructure wrappers (Prisma, Redis, JWT, etc.) |
-| `logger/`    | Structured logger (Pino)                           |
-| `services/`  | Cross-feature services                             |
-| `types/`     | Shared TypeScript types                            |
-| `utils/`     | Shared helpers (Response, async-handler, etc.)     |
+| Subdirectory | Contents                                      |
+| ------------ | --------------------------------------------- |
+| `constants/` | Shared constants used by items (e.g. `PAGE_SIZE`) |
+| `types/`     | Shared type definitions used by items         |
 
 ---
 
-## Route Definitions
+## CLI Commands
 
-### API Route Handlers
+Commands are registered in `src/cli.ts` via Commander and delegated to `src/commands/`.
 
-Route handlers must be thin. Logic delegated to services.
-
-```ts
-// src/features/training/routes/create-module.route.ts
-export const postCreateModule: RequestHandler[] = [
-  validate({ body: CreateModuleSchema }),
-  asyncHandler(async (req: Request, res: Response) => {
-    const user = await withRole(req, UserRole.DPO);
-    const result = await createModule({
-      associationId: user.associationId,
-      body: req.body,
-    });
-    return success(res, { data: result }, 201);
-  }),
-];
+```
+src/commands/
+├── index.ts    ← Barrel re-exporting all command functions
+├── list.ts     ← shared-packages list
+└── add.ts      ← shared-packages add [item-name]
 ```
 
-**Pattern:**
+### Add Command
 
-1. Use `validate()` middleware for Zod validation.
-2. Use `asyncHandler()` to wrap async logic.
-3. Check roles via `withRole()` or middleware.
-4. Call feature service.
-5. Return via `success()` helper.
+```
+shared-packages add <item-name>   — copy a single item
+shared-packages add               — interactive toggle via @clack/prompts
+```
+
+**Flags:**
+- `-o, --overwrite` — replace existing files
+- `--skip-install` — skip dependency installation
+
+### Registry Item Format
+
+Every registry item in `registry.json` declares its source files and target paths:
+
+```json
+{
+  "name": "item-name",
+  "description": "What the item provides.",
+  "files": [
+    { "source": "src/items/utils/foo/foo.ts", "target": "src/shared/foo.ts" }
+  ],
+  "dependencies": ["zod"]
+}
+```
 
 ---
 
-## Middleware Pipeline
+## Registry Loading
 
-Registered in `src/index.ts`.
-
-**Order:**
-
-1. `cors`
-2. `contextMiddleware`
-3. `securityHeaders`
-4. `cookieParser`
-5. `express.json`
-6. `rateLimiter`
-7. Feature Routes
-8. `errorHandler`
+The CLI loads `registry.json` from the package root at startup. It determines the package root via `import.meta.url` — the function lives in `src/registry/index.ts` and resolves one directory level up (since tsup bundles everything into `dist/cli.js`).
 
 ---
 
-## Service Rules
+## Command Rules
 
-- File names use `kebab-case`.
-- One service file = one business operation (where practical).
-- Services handle: Prisma queries, external APIs, business rules.
-- Services must be framework-agnostic (don't pass `req` or `res`).
-- Always scope database queries by `associationId`.
+- One command file = one CLI command implementation.
+- Command functions are async and accept typed options.
+- Use `process.cwd()` as the consumer project root — never assume a fixed path.
+- Path-traversal prevention: validate every target path stays within the consumer project.
+- Check source files exist before copying; throw a descriptive error if missing.
 
 ---
 
 ## Validation Rules
 
-- Use `validate()` from `@lib/validate` on all routes.
-- Schemas use `.strict()` to reject unknown fields.
-- One validator file per operation preferred.
+- Items that export Zod schemas must use `.strict()` to reject unknown fields.
+- Consumer-facing validation libraries (e.g., `zod`) go in the item's `dependencies` list in `registry.json`.
 
 ---
 
 ## API Rules
 
-- Use `success()` and `error()` helpers from `@utils/responses`.
-- Status codes: 200 (OK), 201 (Created), 400 (Bad Request), 401 (Unauthorized), 403 (Forbidden), 404 (Not Found), 500 (Internal Error).
+- Items that target Next.js route handlers (in `src/shared/api/`) must return `NextResponse.json()`.
+- Use `NextResponse` from `next/server`, not Express `Response`.
 
 ---
 
-## Prisma / Database Rules
+## Import Rules
 
-- All Prisma access goes through `shared/lib/prisma`.
-- Filter association-owned data by `associationId`.
-- Prefer `select` over returning full models.
+- Items import each other via `@items/<category>/<item-name>/<file>`.
+- Items import shared stubs via `@src/shared/...`.
+- No `.js` extension in imports (moduleResolution: "bundler").
+- Barrel files (`index.ts`) re-export the main module's public API.
 
 ---
 
@@ -314,11 +276,12 @@ Registered in `src/index.ts`.
 ## AI Agent Checklist
 
 - [ ] No secrets in source files.
-- [ ] Every route uses `validate()`.
-- [ ] Database queries scoped by `associationId`.
+- [ ] Every new item has a folder under `src/items/<category>/<name>/`.
+- [ ] Every item's main source file has a barrel `index.ts` that re-exports.
+- [ ] All registry source paths in `registry.json` point to `src/items/...`.
 - [ ] All new files use `kebab-case`.
-- [ ] Shared infrastructure accessed via `shared/lib/`.
-- [ ] All exported functions include JSDoc.
+- [ ] Every exported function includes JSDoc.
+- [ ] Item dependencies are declared in `registry.json`, not in `package.json`.
 - [ ] Conventional Commits used for all changes.
 
 ---
