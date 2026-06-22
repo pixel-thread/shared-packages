@@ -1,0 +1,39 @@
+{
+  "name": "@pixel-thread/shared-packages",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "description": "Private source-code registry — install selected shared source files into your projects.",
+  "bin": {
+    "shared-packages": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "registry.json",
+    "src/items"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "prepublishOnly": "pnpm build"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "keywords": [
+    "code-registry",
+    "shared",
+    "source"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^15.0.0",
+    "fs-extra": "^11.3.5"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^26.0.0",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@pixel-thread/shared-packages",
+  "version": "1.0.0",
+  "items": [
+    {
+      "name": "user-schema",
+      "description": "Zod schema and types for creating a user.",
+      "files": [
+        {
+          "source": "src/items/user-schema/user.schema.ts",
+          "target": "src/shared/validation/user.schema.ts"
+        }
+      ],
+      "dependencies": ["zod"]
+    },
+    {
+      "name": "api-error",
+      "description": "Reusable HTTP API error class.",
+      "files": [
+        {
+          "source": "src/items/api-error/api-error.ts",
+          "target": "src/shared/errors/api-error.ts"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "description": "Pagination parsing and response helpers.",
+      "files": [
+        {
+          "source": "src/items/pagination/pagination.ts",
+          "target": "src/shared/pagination/pagination.ts"
+        }
+      ]
+    }
+  ]
+}
