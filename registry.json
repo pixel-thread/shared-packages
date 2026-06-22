@@ -272,7 +272,7 @@
         }
       ],
       "itemDependencies": ["http-errors", "normalize-error"],
-      "dependencies": ["express"]
+      "dependencies": ["express", "@types/express"]
     },
     {
       "name": "storage-provider",
