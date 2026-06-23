@@ -29,6 +29,7 @@ export const DEFAULT_CONSUMER_CONFIG: ConsumerConfig = {
     middleware: 'src/shared/middleware',
     validation: 'src/shared/validation',
     services: 'src/shared/services/storage',
+    features: 'src/features',
   },
 };
 

@@ -557,6 +557,67 @@
       ],
       "itemDependencies": ["format-zod-issues", "normalize-error", "http-errors"],
       "dependencies": ["next", "zod", "jose"]
+    },
+    {
+      "name": "auth",
+      "description": "Complete authentication feature: register, login, logout, password reset, JWT tokens, and user profile routes.",
+      "files": [
+        {
+          "source": "src/features/auth/index.ts",
+          "target": "${features}/auth/index.ts"
+        },
+        {
+          "source": "src/features/auth/types/auth.ts",
+          "target": "${features}/auth/types/auth.ts"
+        },
+        {
+          "source": "src/features/auth/validators/auth.ts",
+          "target": "${features}/auth/validators/auth.ts"
+        },
+        {
+          "source": "src/features/auth/lib/password.ts",
+          "target": "${features}/auth/lib/password.ts"
+        },
+        {
+          "source": "src/features/auth/utils/tokens.ts",
+          "target": "${features}/auth/utils/tokens.ts"
+        },
+        {
+          "source": "src/features/auth/services/auth.ts",
+          "target": "${features}/auth/services/auth.ts"
+        },
+        {
+          "source": "src/features/auth/middleware/authenticate.ts",
+          "target": "${features}/auth/middleware/authenticate.ts"
+        },
+        {
+          "source": "src/features/auth/repositories/user.ts",
+          "target": "${features}/auth/repositories/user.ts"
+        },
+        {
+          "source": "src/features/auth/routes/auth.ts",
+          "target": "${features}/auth/routes/auth.ts"
+        },
+        {
+          "source": "src/features/auth/routes/tokens.ts",
+          "target": "${features}/auth/routes/tokens.ts"
+        },
+        {
+          "source": "src/features/auth/routes/me.ts",
+          "target": "${features}/auth/routes/me.ts"
+        },
+        {
+          "source": "src/features/auth/routes/password.ts",
+          "target": "${features}/auth/routes/password.ts"
+        }
+      ],
+      "itemDependencies": [
+        "http-errors", "async-handler", "jwt-utils", "rbac",
+        "express-validate", "hash", "shared-constants",
+        "shared-types", "env-validator"
+      ],
+      "dependencies": ["express", "zod", "jose"],
+      "devDependencies": ["@types/express", "@prisma/client"]
     }
   ]
 }
