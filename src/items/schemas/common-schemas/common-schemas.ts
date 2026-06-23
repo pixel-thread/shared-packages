@@ -23,3 +23,5 @@ export const pageNumberValidation = z.coerce
   .max(1000, 'Maximum page number is 1000')
   .positive('Page number must be positive')
   .catch(1);
+
+export const passwordValidation = z.string().min(8, 'Password must be at least 8 characters');

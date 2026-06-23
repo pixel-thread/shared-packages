@@ -15,7 +15,8 @@
       "@sharedTypes/*": ["./src/shared/types/*"],
       "@lib/*": ["./src/lib/*"],
       "@utils/*": ["./src/utils/*"],
-      "@items/*": ["./src/items/*"]
+      "@items/*": ["./src/items/*"],
+      "@feature/*": ["./src/features/*"]
     },
     "ignoreDeprecations": "6.0"
   },
