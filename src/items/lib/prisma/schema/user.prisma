@@ -19,6 +19,9 @@ model User {
   deletedAt                DateTime?
   createdAt                DateTime      @default(now())
   updatedAt                DateTime      @updatedAt
+  pushTokens               PushToken[]
+  refreshTokens            RefreshToken[]
+  verificationCodes        VerificationCode[]
 
   @@index([email])
   @@index([role])

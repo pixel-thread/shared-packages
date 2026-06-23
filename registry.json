@@ -77,15 +77,15 @@
       "description": "Base Prisma schema with PostgreSQL extensions and client singleton with pg-pool adapter.",
       "files": [
         {
-          "source": "src/items/prisma/base.prisma",
+          "source": "src/items/lib/prisma/schema/base.prisma",
           "target": "prisma/schema/base.prisma"
         },
         {
-          "source": "src/items/prisma/client.ts",
-          "target": "src/shared/libs/prisma/index.ts"
+          "source": "src/items/lib/prisma/client.ts",
+          "target": "src/shared/lib/prisma/index.ts"
         },
         {
-          "source": "src/items/prisma/prisma.config.ts",
+          "source": "src/items/lib/prisma/prisma.config.ts",
           "target": "prisma.config.ts"
         }
       ],
@@ -98,7 +98,7 @@
       "files": [
         {
           "source": "src/items/lib/hash/hash.ts",
-          "target": "src/shared/libs/hash/index.ts"
+          "target": "src/shared/lib/hash/index.ts"
         }
       ]
     },
@@ -109,7 +109,7 @@
       "files": [
         {
           "source": "src/items/lib/encryption/encryption.ts",
-          "target": "src/shared/libs/encryption/index.ts"
+          "target": "src/shared/lib/encryption/index.ts"
         }
       ]
     },
@@ -211,7 +211,7 @@
       "files": [
         {
           "source": "src/items/utils/regex-patterns/regex-patterns.ts",
-          "target": "${utils}/constants/regex-patterns.ts"
+          "target": "${utils}/regex-patterns/index.ts"
         }
       ]
     },
@@ -220,8 +220,8 @@
       "description": "Common Zod schemas (UUID, pageSize, pageNumber) using shared PAGE_SIZE constant.",
       "files": [
         {
-          "source": "src/items/schemas/common-schemas/common-schemas.ts",
-          "target": "${validation}/common-schemas/common-schemas.ts"
+          "source": "src/items/validation/common/index.ts",
+          "target": "${validation}/common/index.ts"
         }
       ],
       "itemDependencies": ["shared-constants"],
@@ -345,7 +345,7 @@
       "files": [
         {
           "source": "src/items/utils/jwt-utils/jwt-utils.ts",
-          "target": "${utils}/jwt/jwt-utils.ts"
+          "target": "${utils}/jwt-utils/index.ts"
         }
       ],
       "dependencies": ["jose"]
@@ -383,7 +383,7 @@
       "files": [
         {
           "source": "src/items/middleware/express-validate/express-validate.ts",
-          "target": "${middleware}/express-validate/express-validate.ts"
+          "target": "${middleware}/express-validate/index.ts"
         }
       ],
       "itemDependencies": ["http-errors", "format-zod-issues"],
@@ -547,6 +547,18 @@
       "dependencies": []
     },
     {
+      "name": "express-response",
+      "description": "Express response helpers.",
+      "files": [
+        {
+          "source": "src/items/utils/response/express-response.ts",
+          "target": "${utils}/response/express-response.ts"
+        }
+      ],
+      "itemDependencies": [],
+      "dependencies": ["express"]
+    },
+    {
       "name": "with-validation",
       "description": "Next.js route handler validation wrapper with Zod schema support.",
       "files": [
@@ -613,13 +625,34 @@
         {
           "source": "src/features/auth/validators/index.ts",
           "target": "${features}/auth/validators/index.ts"
+        },
+        {
+          "source": "src/items/lib/prisma/schema/auth.prisma",
+          "target": "prisma/schema/auth.prisma"
+        },
+        {
+          "source": "src/items/lib/prisma/schema/user.prisma",
+          "target": "prisma/schema/user.prisma"
+        },
+        {
+          "source": "src/items/lib/prisma/schema/enum.prisma",
+          "target": "prisma/schema/enums.prisma"
         }
       ],
       "itemDependencies": [
-        "http-errors", "async-handler", "jwt-utils", "rbac",
-        "express-validate", "hash", "shared-constants",
-        "shared-types", "env-validator", "regex-patterns",
-        "common-schemas"
+        "http-errors",
+        "async-handler",
+        "jwt-utils",
+        "rbac",
+        "express-validate",
+        "hash",
+        "shared-constants",
+        "shared-types",
+        "env-validator",
+        "regex-patterns",
+        "common-schemas",
+        "express-response",
+        "prisma"
       ],
       "dependencies": ["express", "zod", "jose", "bcryptjs"],
       "devDependencies": ["@types/express", "@prisma/client"]

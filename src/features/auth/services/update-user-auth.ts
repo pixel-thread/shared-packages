@@ -1,12 +1,12 @@
+import { prisma } from '@items/lib/prisma';
 import { Prisma } from '@prisma/client';
-import { prisma } from '@items/prisma/client';
 
 // ---- Types ----
 
 /** Props for updating a single user auth. */
-export type Props = Prisma.UserAuthUpdateArgs;
+export type Props = Prisma.UserUpdateArgs;
 
 // ---- Functions ----
 export async function updateUserAuth(props: Props) {
-  return await prisma.userAuth.update(props);
+  return await prisma.user.update(props);
 }

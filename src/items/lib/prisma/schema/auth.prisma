@@ -45,23 +45,3 @@ model PushToken {
   @@map("push_tokens")
 }
 
-model ConsentReceipt {
-  id            String         @id @default(uuid())
-  associationId String
-  userId        String
-  purpose       ConsentPurpose
-  status        ConsentStatus
-  ipAddress     String?
-  userAgent     String?
-  channel       String         @default("web")
-  metadata      Json?
-  createdAt     DateTime       @default(now())
-
-  association Association @relation(fields: [associationId], references: [id], onDelete: Cascade)
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([associationId])
-  @@index([userId, purpose])
-  @@index([createdAt])
-  @@map("consent_receipts")
-}
