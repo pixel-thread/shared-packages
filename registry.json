@@ -83,9 +83,13 @@
         {
           "source": "src/items/prisma/client.ts",
           "target": "src/shared/libs/prisma/index.ts"
+        },
+        {
+          "source": "src/items/prisma/prisma.config.ts",
+          "target": "prisma.config.ts"
         }
       ],
-      "dependencies": ["@prisma/client", "@prisma/adapter-pg", "pg"],
+      "dependencies": ["@prisma/client", "@prisma/adapter-pg", "pg", "prisma", "dotenv"],
       "devDependencies": ["@types/pg"]
     },
     {
@@ -563,60 +567,61 @@
       "description": "Complete authentication feature: register, login, logout, password reset, JWT tokens, and user profile routes.",
       "files": [
         {
-          "source": "src/features/auth/index.ts",
-          "target": "${features}/auth/index.ts"
-        },
-        {
-          "source": "src/features/auth/types/auth.ts",
-          "target": "${features}/auth/types/auth.ts"
-        },
-        {
-          "source": "src/features/auth/validators/auth.ts",
-          "target": "${features}/auth/validators/auth.ts"
+          "source": "src/features/auth/lib/otp.ts",
+          "target": "${features}/auth/lib/otp.ts"
         },
         {
           "source": "src/features/auth/lib/password.ts",
           "target": "${features}/auth/lib/password.ts"
         },
         {
-          "source": "src/features/auth/utils/tokens.ts",
-          "target": "${features}/auth/utils/tokens.ts"
+          "source": "src/features/auth/routes/sign-in.route.ts",
+          "target": "${features}/auth/routes/sign-in.route.ts"
         },
         {
-          "source": "src/features/auth/services/auth.ts",
-          "target": "${features}/auth/services/auth.ts"
+          "source": "src/features/auth/services/create-refresh-token.ts",
+          "target": "${features}/auth/services/create-refresh-token.ts"
         },
         {
-          "source": "src/features/auth/middleware/authenticate.ts",
-          "target": "${features}/auth/middleware/authenticate.ts"
+          "source": "src/features/auth/services/create-verification-code.ts",
+          "target": "${features}/auth/services/create-verification-code.ts"
         },
         {
-          "source": "src/features/auth/repositories/user.ts",
-          "target": "${features}/auth/repositories/user.ts"
+          "source": "src/features/auth/services/find-user-auth-first.ts",
+          "target": "${features}/auth/services/find-user-auth-first.ts"
         },
         {
-          "source": "src/features/auth/routes/auth.ts",
-          "target": "${features}/auth/routes/auth.ts"
+          "source": "src/features/auth/services/update-user-auth.ts",
+          "target": "${features}/auth/services/update-user-auth.ts"
         },
         {
-          "source": "src/features/auth/routes/tokens.ts",
-          "target": "${features}/auth/routes/tokens.ts"
+          "source": "src/features/auth/utils/helpers/index.ts",
+          "target": "${features}/auth/utils/helpers/index.ts"
         },
         {
-          "source": "src/features/auth/routes/me.ts",
-          "target": "${features}/auth/routes/me.ts"
+          "source": "src/features/auth/utils/helpers/set-token.ts",
+          "target": "${features}/auth/utils/helpers/set-token.ts"
         },
         {
-          "source": "src/features/auth/routes/password.ts",
-          "target": "${features}/auth/routes/password.ts"
+          "source": "src/features/auth/utils/mock-async-verification.ts",
+          "target": "${features}/auth/utils/mock-async-verification.ts"
+        },
+        {
+          "source": "src/features/auth/utils/random-between.ts",
+          "target": "${features}/auth/utils/random-between.ts"
+        },
+        {
+          "source": "src/features/auth/validators/index.ts",
+          "target": "${features}/auth/validators/index.ts"
         }
       ],
       "itemDependencies": [
         "http-errors", "async-handler", "jwt-utils", "rbac",
         "express-validate", "hash", "shared-constants",
-        "shared-types", "env-validator"
+        "shared-types", "env-validator", "regex-patterns",
+        "common-schemas"
       ],
-      "dependencies": ["express", "zod", "jose"],
+      "dependencies": ["express", "zod", "jose", "bcryptjs"],
       "devDependencies": ["@types/express", "@prisma/client"]
     }
   ]
